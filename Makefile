@@ -1,41 +1,25 @@
 CC		:= gcc
 CFLAGS	:= -Wall -Wextra -g
 
-BIN		:= bin
-SRC		:= src
-INCLUDE	:= include
-LIB		:= lib
+BIN		:= ./bin
+SRC		:= ./src
 
-LIBRARIES	:=
+all: piLeib piMonte mv mm fibonacci
 
-ifeq ($(OS),Windows_NT)
-EXECUTABLE	:= main.exe
-SOURCEDIRS	:= $(SRC)
-INCLUDEDIRS	:= $(INCLUDE)
-LIBDIRS		:= $(LIB)
-else
-EXECUTABLE	:= main
-SOURCEDIRS	:= $(shell find $(SRC) -type d)
-INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
-LIBDIRS		:= $(shell find $(LIB) -type d)
-endif
+piLeib: $(SRC)/piLeib.c Makefile
+	$(CC) $(CFLAGS) $(SRC)/piLeib.c -o $(BIN)/piLeib
 
-CINCLUDES	:= $(patsubst %,-I%, $(INCLUDEDIRS:%/=%))
-CLIBS		:= $(patsubst %,-L%, $(LIBDIRS:%/=%))
+piMonte: $(SRC)/piMonte.c Makefile
+	$(CC) $(CFLAGS) $(SRC)/piMonte.c -o $(BIN)/piMonte
 
-SOURCES		:= $(wildcard $(patsubst %,%/*.c, $(SOURCEDIRS)))
-OBJECTS		:= $(SOURCES:.c=.o)
+mv: $(SRC)/mv.c Makefile
+	$(CC) $(CFLAGS) $(SRC)/mv.c -o $(BIN)/mv
 
-all: $(BIN)/$(EXECUTABLE)
+mm: $(SRC)/mm.c Makefile
+	$(CC) $(CFLAGS) $(SRC)/mm.c -o $(BIN)/mm
 
-.PHONY: clean
-clean:
-	-$(RM) $(BIN)/$(EXECUTABLE)
-	-$(RM) $(OBJECTS)
+fibonacci: $(SRC)/fibonacci.c Makefile
+	$(CC) $(CFLAGS) $(SRC)/fibonacci.c -o $(BIN)/fibonacci
 
-
-run: all
-	./$(BIN)/$(EXECUTABLE)
-
-$(BIN)/$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(CFLAGS) $(CINCLUDES) $(CLIBS) $^ -o $@ $(LIBRARIES)
+clean: 
+	rm -r $(BIN)/*
