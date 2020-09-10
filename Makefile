@@ -1,5 +1,5 @@
 CC		:= gcc
-CFLAGS	:= -Wall -Wextra -g
+CFLAGS	:= -std=c99 -Wall -Wextra -g
 
 BIN		:= ./bin
 SRC		:= ./src
