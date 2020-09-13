@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../include/mmio.h"
 
 int main(int argc, char *argv[])
@@ -11,17 +12,32 @@ int main(int argc, char *argv[])
 
     if (argc != 4)
 	{
-		fprintf(stderr, "Usage: ./bin/mm <matrix file> <vector file> <output file>\n");
+		fprintf(stderr, "Usage: ./bin/mm <matrix .m file> <vector .m file> <output .m file>\n");
 		return(-1);
 	}
+
+    if(strstr(argv[1], ".m") == NULL) {
+        fprintf(stderr, "Usage: ./bin/mm <matrix .m file> <vector .m file> <output .m file>\n");
+		return(-1);
+    }
+
+    if(strstr(argv[2], ".m") == NULL) {
+        fprintf(stderr, "Usage: ./bin/mm <matrix .m file> <vector .m file> <output .m file>\n");
+		return(-1);
+    }
+
+    if(strstr(argv[3], ".m") == NULL) {
+        fprintf(stderr, "Usage: ./bin/mm <matrix .m file> <vector .m file> <output .m file>\n");
+		return(-1);
+    }
 
     m = fopen(argv[1], "r");
     v = fopen(argv[2], "r");
 
-    if (m == NULL || v == NULL) {
+    if ((v == NULL) || (m == NULL)) {
         fclose(m);
         fclose(v);
-        fprintf(stderr, "Usage: ./bin/mm <matrix file> <vector file> <output file>\n");
+        fprintf(stderr, "Usage: ./bin/mm <matrix .m file> <vector .m file> <output .m file>\n");
         return(-1);
     }
 
@@ -29,7 +45,7 @@ int main(int argc, char *argv[])
     {
         fclose(m);
         fclose(v);
-        fprintf(stderr, "Usage: ./bin/mm <matrix file> <vector file> <output file>\n");
+        fprintf(stderr, "Usage: ./bin/mm <matrix .m file> <vector .m file> <output .m file>\n");
         printf("Could not process Matrix Market banner from files.\n");
         return(-1);
     }

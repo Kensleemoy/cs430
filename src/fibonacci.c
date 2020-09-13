@@ -17,7 +17,6 @@ int main(int argc, char *argv[]) {
             term = input;
             
             for(int i = 0; i <= term; i++) {
-                printf("%d, ", firstT);
                 if (i == term) {
                     result = firstT;
                 }
@@ -25,7 +24,7 @@ int main(int argc, char *argv[]) {
                 firstT = secondT;
                 secondT = nextTerm;
             }
-            printf("\nThe [%d] number in the Fibonacci sequence: %d\n", term, result);
+            printf("The [%d] number in the Fibonacci sequence: %d\n", term, result);
             return 0;
         } else {
             printf("USAGE: ./fibonacci <natural integer number>\n");

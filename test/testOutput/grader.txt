@@ -1,7 +1,0 @@
-
-unit_tests.sh -- running smoke tests
-
-START: Testing Leibniz's Pi Estimation
----SUCCESS: piLeib 100
----SUCCESS: piLeib 1000
-11 out of 10 tests PASSED
