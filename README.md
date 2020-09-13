@@ -1,77 +1,88 @@
-<pre>##AUTHOR
-Kenslee Moy 
+##AUTHOR
+Kenslee Moy
 
-##INSTALLATION 
+##INSTALLATION
 **Run all commands from the top level**
 
-** To compile all programs at once, run:
-    make all
+* To compile all programs at once, run:
 
-** To compile a single program, run any of these options:
-    make piLeib
-    make piMonte
-    make fibonacci
-    make mm
-    make mv
+    `make all`
+
+* To compile a single program, run any of these options:
+
+    `make piLeib`
+	
+    `make piMonte`
+	
+    `make fibonacci`
+	
+    `make mm`
+	
+    `make mv`
 
 ##EXECUTION
 **Run all commands from the top level**
 
-** To run Leibniz's Estimation, run:
-    ./bin/piLeib <integer>
+* To run Leibniz's Estimation, run:
+   ` ./bin/piLeib <integer>`
 
-** To run Monte Carlo's Estimation, run:
-    ./bin/piMonte
+* To run Monte Carlo's Estimation, run:
+   ` ./bin/piMonte`
 
-** To run Fibonacci, run:
-    ./bin/fibonacci <natural integer number>
+* To run Fibonacci, run:
+   ` ./bin/fibonacci <natural integer number>`
 
-** To run Matrix-Vector Multiplication, run:
-    ./bin/mv <path to matrix .m file> <path to vector .m file> <path to output .m file>
-    NOTE: mv will only accept a .m file with the header: 
-        %%MatrixMarket matrix array integer general
+* To run Matrix-Vector Multiplication, run:
+    `./bin/mv <path to matrix .m file> <path to vector .m file> <path to output .m file>`
+	
+	NOTE: mv will only accept a .m file with the header:
+        `%%MatrixMarket matrix array integer general`
     and with a column of size 1
     NOTE: mv will quit if matrix row size != vector column size
     NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
 
-** To run Matrix-Matrix Multiplication, run:
+* To run Matrix-Matrix Multiplication, run:
     ./bin/mm <path to 1st matrix .m file> <path to 2nd matrix.m file> <path to output .m file>
     NOTE: mm will quit if the 1st matrix's column size != 2nd matrix's row size
     NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
 
-** To clean program, run:
-    make clean
+* To clean program, run:
+    `make clean`
 
-** To clean testing files, run:
-    make cleanTests
+* To clean testing files, run:
+   ` make cleanTests`
     NOTE: it is suggested to use this command before running tests to ensure output file contains 
         only the most recent logs
 
 ##TESTING
-** To test the toy problems, run:
-    ./test/unit_test.sh ./test/testOutput/grading.txt
+* To test the toy problems, run:
+   ` ./test/unit_test.sh ./test/testOutput/grading.txt`
 
-** Alternatively, run:
-    ./test/unit_test.sh <path to desired output file>
+* Alternatively, run:
+   ` ./test/unit_test.sh <path to desired output file>`
 
-** To alter input/output files, edit the unit_tests.sh file directly
+* To alter input/output files, edit the unit_tests.sh file directly
 
 ##FORMATTING
-** Format of accepted Matrix .m files:
-    %%MatrixMarket matrix array integer general
+* Format of accepted Matrix .m files:
+    ```c
+%%MatrixMarket matrix array integer general
     <row size integer> <column size integer>
     <value>
     <value>
     ...
     <value>
+```
 
-** Format of accepted Vector .m files:
+* Format of accepted Vector .m files:
+```c
     %%MatrixMarket matrix array integer general
     <row size integer> 1
     <value>
     <value>
     ...
     <value>
+```
 
 ##DESCRIPTION
 **piLeib**
@@ -100,11 +111,10 @@ mm takes in a matix .m file, another matirx .m file, and an output file to
 write the resulting matrix to. mm checks to see if the given matrices cna be
 multiplied together.
 
-** Resources:
-(Leibniz formula) https://stackoverflow.com/questions/18036367/leibniz-formula-for-%CF%80-is-this-any-good-python
-(Checking in Leibniz for valid input) https://stackoverflow.com/questions/17292545/how-to-check-if-the-input-is-a-number-or-not-in-c
-(Monte Carlo formula) https://www.geeksforgeeks.org/estimating-value-pi-using-monte-carlo/
-(Fibonacci formula) https://www.programiz.com/c-programming/examples/fibonacci-series
-(Matrix Matrix multiply formula) https://www.programiz.com/python-programming/examples/multiply-matrix
-(Matrix Vector multiply) https://mathinsight.org/matrix_vector_multiplication
-</pre>
+##Resources:
+[Leibniz formula] (https://stackoverflow.com/questions/18036367/leibniz-formula-for-%CF%80-is-this-any-good-python)
+[Checking for valid input] (https://stackoverflow.com/questions/17292545/how-to-check-if-the-input-is-a-number-or-not-in-c)
+[Monte Carlo formula] (https://www.geeksforgeeks.org/estimating-value-pi-using-monte-carlo/)
+[Fibonacci formula] (https://www.programiz.com/c-programming/examples/fibonacci-series)
+[Matrix Matrix multiply formula] (https://www.programiz.com/python-programming/examples/multiply-matrix)
+[Matrix Vector multiply] (https://mathinsight.org/matrix_vector_multiplication)
