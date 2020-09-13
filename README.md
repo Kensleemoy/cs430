@@ -1,13 +1,13 @@
-##AUTHOR
+<p>##AUTHOR <br />
 Kenslee Moy 
 
-##INSTALLATION
+##INSTALLATION <br />
 **Run all commands from the top level**
 
-* To compile all programs at once, run:
+*To compile all programs at once, run:
     make all
 
-* To compile a single program, run any of these options:
+*To compile a single program, run any of these options:
     make piLeib
     make piMonte
     make fibonacci
@@ -107,3 +107,4 @@ multiplied together.
 (Fibonacci formula) https://www.programiz.com/c-programming/examples/fibonacci-series
 (Matrix Matrix multiply formula) https://www.programiz.com/python-programming/examples/multiply-matrix
 (Matrix Vector multiply) https://mathinsight.org/matrix_vector_multiplication
+</p>
