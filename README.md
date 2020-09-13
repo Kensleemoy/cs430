@@ -1,13 +1,13 @@
-<p>##AUTHOR <br />
+<pre>##AUTHOR
 Kenslee Moy 
 
-##INSTALLATION <br />
+##INSTALLATION 
 **Run all commands from the top level**
 
-*To compile all programs at once, run:
+** To compile all programs at once, run:
     make all
 
-*To compile a single program, run any of these options:
+** To compile a single program, run any of these options:
     make piLeib
     make piMonte
     make fibonacci
@@ -17,16 +17,16 @@ Kenslee Moy
 ##EXECUTION
 **Run all commands from the top level**
 
-* To run Leibniz's Estimation, run:
+** To run Leibniz's Estimation, run:
     ./bin/piLeib <integer>
 
-* To run Monte Carlo's Estimation, run:
+** To run Monte Carlo's Estimation, run:
     ./bin/piMonte
 
-* To run Fibonacci, run:
+** To run Fibonacci, run:
     ./bin/fibonacci <natural integer number>
 
-* To run Matrix-Vector Multiplication, run:
+** To run Matrix-Vector Multiplication, run:
     ./bin/mv <path to matrix .m file> <path to vector .m file> <path to output .m file>
     NOTE: mv will only accept a .m file with the header: 
         %%MatrixMarket matrix array integer general
@@ -34,30 +34,30 @@ Kenslee Moy
     NOTE: mv will quit if matrix row size != vector column size
     NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
 
-* To run Matrix-Matrix Multiplication, run:
+** To run Matrix-Matrix Multiplication, run:
     ./bin/mm <path to 1st matrix .m file> <path to 2nd matrix.m file> <path to output .m file>
     NOTE: mm will quit if the 1st matrix's column size != 2nd matrix's row size
     NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
 
-* To clean program, run:
+** To clean program, run:
     make clean
 
-* To clean testing files, run:
+** To clean testing files, run:
     make cleanTests
     NOTE: it is suggested to use this command before running tests to ensure output file contains 
         only the most recent logs
 
 ##TESTING
-* To test the toy problems, run:
+** To test the toy problems, run:
     ./test/unit_test.sh ./test/testOutput/grading.txt
 
-* Alternatively, run:
+** Alternatively, run:
     ./test/unit_test.sh <path to desired output file>
 
-* To alter input/output files, edit the unit_tests.sh file directly
+** To alter input/output files, edit the unit_tests.sh file directly
 
 ##FORMATTING
-* Format of accepted Matrix .m files:
+** Format of accepted Matrix .m files:
     %%MatrixMarket matrix array integer general
     <row size integer> <column size integer>
     <value>
@@ -65,7 +65,7 @@ Kenslee Moy
     ...
     <value>
 
-* Format of accepted Vector .m files:
+** Format of accepted Vector .m files:
     %%MatrixMarket matrix array integer general
     <row size integer> 1
     <value>
@@ -107,4 +107,4 @@ multiplied together.
 (Fibonacci formula) https://www.programiz.com/c-programming/examples/fibonacci-series
 (Matrix Matrix multiply formula) https://www.programiz.com/python-programming/examples/multiply-matrix
 (Matrix Vector multiply) https://mathinsight.org/matrix_vector_multiplication
-</p>
+</pre>
