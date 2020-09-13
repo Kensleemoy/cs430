@@ -38,19 +38,28 @@ Kenslee Moy
 	NOTE: mv will only accept a .m file with the header:
         `%%MatrixMarket matrix array integer general`
     and with a column of size 1
+
     NOTE: mv will quit if matrix row size != vector column size
+
     NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
+    
 
 * To run Matrix-Matrix Multiplication, run:
-    ./bin/mm <path to 1st matrix .m file> <path to 2nd matrix.m file> <path to output .m file>
+
+    `./bin/mm <path to 1st matrix .m file> <path to 2nd matrix.m file> <path to output .m file>`
+
     NOTE: mm will quit if the 1st matrix's column size != 2nd matrix's row size
+
     NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
 
 * To clean program, run:
+
     `make clean`
 
 * To clean testing files, run:
+
    ` make cleanTests`
+
     NOTE: it is suggested to use this command before running tests to ensure output file contains 
         only the most recent logs
 
