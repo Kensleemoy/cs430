@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
     output = fopen(argv[3], "w");
 
-    int *matrix1[m1Size], *matrix2[m2Size], *outputMatrix[outputMSize];
+    int matrix1[m1Size], matrix2[m2Size], outputMatrix[outputMSize];
 
     for (int i=0; i<m1N; i++) {
         for (int j=0; j<m1M; j++) {

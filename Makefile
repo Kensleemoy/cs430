@@ -6,6 +6,7 @@ SRC		:= ./src
 INCL 	:= ./include
 LIB		:= ./lib
 OUTPUT	:= ./output
+TEST	:= ./test/testOutput
 
 all: piLeib piMonte mv mm fibonacci
 
@@ -27,3 +28,7 @@ fibonacci: $(SRC)/fibonacci.c Makefile
 clean: 
 	-rm -f $(BIN)/*
 	-rm -f $(OUTPUT)/*
+
+cleanTests:
+	-rm -f $(TEST)/*
+	-rm -f diff.out

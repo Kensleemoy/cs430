@@ -6,6 +6,9 @@
 *
 */
 
+#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 
 #include <stdio.h>
 #include <string.h>
