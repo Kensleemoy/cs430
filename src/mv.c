@@ -93,17 +93,15 @@ int main(int argc, char *argv[])
     for (int i = 0; i < matrixN; i++) {
         int sum = 0;
         for (int j = 0; j < matrixM; j++) {
-            printf("%d x %d\n", matrix[(j*matrixN)+i], vector[j]);
             sum += ((int)matrix[(j*matrixN)+i] * (int)vector[j]);
         }
-        printf("--- [%d] = %d\n", i, sum);
         outputVector[i] = sum;
     }
 
-    // mm_write_banner(output, matcode);
-    // mm_write_mtx_array_size(output, vectorSize, 1);
-    // for (int i=0; i<outputSize; i++)
-    //     fprintf(output, "%d\n", outputVector[i]);
+    mm_write_banner(output, matcode);
+    mm_write_mtx_array_size(output, vectorSize, 1);
+    for (int i=0; i<outputSize; i++)
+        fprintf(output, "%d\n", outputVector[i]);
 
     fclose(output);
 
