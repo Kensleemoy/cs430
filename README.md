@@ -113,8 +113,14 @@ multiplied together.
 
 ##RESOURCES <br />
 [Leibniz formula](https://stackoverflow.com/questions/18036367/leibniz-formula-for-%CF%80-is-this-any-good-python "Leibniz formula")
+
 [Checking for valid input](https://stackoverflow.com/questions/17292545/how-to-check-if-the-input-is-a-number-or-not-in-c "Checking for valid input")
+
 [Monte Carlo formula](https://www.geeksforgeeks.org/estimating-value-pi-using-monte-carlo/ "Monte Carlo formula")
+
 [Fibonacci formula](https://www.programiz.com/c-programming/examples/fibonacci-series "Fibonacci formula")
+
 [Matrix Matrix multiply formula](https://www.programiz.com/python-programming/examples/multiply-matrix "Matrix Matrix multiply formula")
+
 [Matrix Vector multiply](https://mathinsight.org/matrix_vector_multiplication "Matrix Vector multiply")
+
