@@ -1,7 +1,7 @@
-##AUTHOR
+##AUTHOR <br />
 Kenslee Moy
 
-##INSTALLATION
+##INSTALLATION <br />
 **Run all commands from the top level**
 
 * To compile all programs at once, run:
@@ -20,7 +20,7 @@ Kenslee Moy
 	
     `make mv`
 
-##EXECUTION
+##EXECUTION <br />
 **Run all commands from the top level**
 
 * To run Leibniz's Estimation, run:
@@ -55,18 +55,18 @@ Kenslee Moy
         only the most recent logs
 
 ##TESTING
-* To test the toy problems, run:
+* To test the toy problems, run: <br />
    ` ./test/unit_test.sh ./test/testOutput/grading.txt`
 
-* Alternatively, run:
+* Alternatively, run: <br />
    ` ./test/unit_test.sh <path to desired output file>`
 
-* To alter input/output files, edit the unit_tests.sh file directly
+* To alter input/output files, edit the `unit_tests.sh` file directly
 
-##FORMATTING
+##FORMATTING <br />
 * Format of accepted Matrix .m files:
-    ```c
-%%MatrixMarket matrix array integer general
+```c
+    %%MatrixMarket matrix array integer general
     <row size integer> <column size integer>
     <value>
     <value>
@@ -84,34 +84,34 @@ Kenslee Moy
     <value>
 ```
 
-##DESCRIPTION
-**piLeib**
+##DESCRIPTION <br />
+**piLeib** <br />
 piLeib takes in an integer argument and estimates pi using Leibniz's Series. 
 The result is printed to the console.
 
-**piMonte**
+**piMonte** <br />
 piMonte takes no parameters. It estimates pi using Monte Carlo's Pi
 Estimation based upon 10 (hypothetical) darts. The result is printed to
 the console.
 
-**fibonacci**
+**fibonacci** <br />
 fibonacci takes in a natural integer argument and calculates the nth
 number in the Fibonacci sequence, based upon the given argument. The result
 is printed to the console. 
 NOTE: Fibonacci starts at fib(0) = 0, so to calculate the 
 3rd term, it will display terms 0, 1, 1, 2, 3 to give you the fib(3) = 2.
 
-**mv**
+**mv** <br />
 mv takes in a matrix .m file, a matrix .m file where the column size is 1, 
 and an output file to write the resulting vector to. mv checks to see if the
 given files can be multiplied together.
 
-**mm**
+**mm** <br />
 mm takes in a matix .m file, another matirx .m file, and an output file to
 write the resulting matrix to. mm checks to see if the given matrices cna be
 multiplied together.
 
-##Resources:
+##Resources <br />
 [Leibniz formula] (https://stackoverflow.com/questions/18036367/leibniz-formula-for-%CF%80-is-this-any-good-python)
 [Checking for valid input] (https://stackoverflow.com/questions/17292545/how-to-check-if-the-input-is-a-number-or-not-in-c)
 [Monte Carlo formula] (https://www.geeksforgeeks.org/estimating-value-pi-using-monte-carlo/)
