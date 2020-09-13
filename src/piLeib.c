@@ -4,7 +4,7 @@
 int main(int argc, char *argv[]) {
     int input;
     char* next;
-    double upperbound, result, sign;
+    double upperBound, result, sign;
 
     if (argc == 2) {
         input = strtol(argv[1], &next, 10);
