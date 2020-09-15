@@ -1,28 +1,47 @@
-Kenslee Moy - Grading Ravi's PA1
+Floriana Ciaglia
+I am grading Kenslee's pa1
 
-README.md - 18/20
-Clear and easy to understand README, it just
-is missed some descriptions of the programs so
-that the reader can get a brief overview of how
-your programs function and the usage for each.
+README.md
 
-Build System - 9/10
-It works without any errors, but there are
-warning errors that would be nice to remove.
+The README is very thorough. I like that you have a target to make each
+toy separately. 
+I had a hard time finding the command to run the automated tests.
 
-Testing Framework - 28/30
-Testing framework is easy to use and makes without
-any errors. I just took off some points as it 
-doesnt test all 5 programs, but it is really nice
-to use and it looks great visually.
+Score 20/20
 
-Code Functions - 4/10
-Fibonacci and Monte Carlo work as intended, but
-those are the only 2 programs in the project.
+BUILD SYSTEM
 
-Directory Structure - 10/10
-It's organized in a logical manner
+In order to have Make create a bin/ and obj/ directory only when needed,
+you can add the "mkdir -p <dir>" to your makefile so that you don't have to
+worry about creating the executable and object files directories every time. 
+I struggled with the same issue as you: Github was not pushing any empty directories
+and I found the command above to fix that issue. 
 
-Code Review - 4/10
-The code for the working programs look good and
-are fairly simple. 
+Score 20/20
+
+TESTING FRAMEWORK
+
+Your testing script is impressive. However, I think you can make the running of that 
+script a little bit more intuitive. I would add it to the Makefile so that you can just
+run "make test" and get the results. 
+
+Score 25/30
+
+
+CODE FUNCTIONS
+
+All code seems to function correctly. 
+
+Score 10/10
+
+DIRECTORY STRUCTURE
+
+The directory scructure looks correct. 
+
+Score 10/10
+
+CODE REVIEW (code fully serial)
+
+The code is fully serial
+
+Score 10/10
