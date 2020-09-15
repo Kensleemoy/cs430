@@ -63,12 +63,15 @@ Kenslee Moy
     NOTE: it is suggested to use this command before running tests to ensure output file contains 
         only the most recent logs
 
-##TESTING
-* To test the toy problems, run: <br />
-   ` ./test/unit_test.sh ./test/testOutput/grading.txt`
+##TESTING <br />
+**Run all commands from the top level**
 
-* Alternatively, run: <br />
-   ` ./test/unit_test.sh <path to desired output file>`
+* To test the toy problems, run: <br />
+   ` make test`
+
+   NOTE: this will place all test logs in a top-level file called "test_logs.txt"
+
+   NOTE: errors documents will be placed into test/testOutput/
 
 * To alter input/output files, edit the `unit_tests.sh` file directly
 
