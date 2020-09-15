@@ -1,0 +1,28 @@
+Kenslee Moy - Grading Ravi's PA1
+
+README.md - 18/20
+Clear and easy to understand README, it just
+is missed some descriptions of the programs so
+that the reader can get a brief overview of how
+your programs function and the usage for each.
+
+Build System - 9/10
+It works without any errors, but there are
+warning errors that would be nice to remove.
+
+Testing Framework - 28/30
+Testing framework is easy to use and makes without
+any errors. I just took off some points as it 
+doesnt test all 5 programs, but it is really nice
+to use and it looks great visually.
+
+Code Functions - 4/10
+Fibonacci and Monte Carlo work as intended, but
+those are the only 2 programs in the project.
+
+Directory Structure - 10/10
+It's organized in a logical manner
+
+Code Review - 4/10
+The code for the working programs look good and
+are fairly simple. 
