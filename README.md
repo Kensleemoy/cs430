@@ -1,7 +1,7 @@
-##Group 3 <br />
+## Group 3 <br />
 Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 
-##INSTALLATION <br />
+## INSTALLATION <br />
 **Run all commands from the top level**
 
 * To compile all programs at once, run:
@@ -20,7 +20,7 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 	
     `make mv`
 
-##EXECUTION <br />
+## EXECUTION <br />
 **Run all commands from the top level**
 
 * To run Leibniz's Estimation, run:
@@ -63,7 +63,7 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
     NOTE: it is suggested to use this command before running tests to ensure output file contains 
         only the most recent logs
 
-##TESTING <br />
+## TESTING <br />
 **Run all commands from the top level**
 
 * To test the toy problems, run: <br />
@@ -75,7 +75,7 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 
 * To alter input/output files, edit the `unit_tests.sh` file directly
 
-##FORMATTING <br />
+## FORMATTING <br />
 * Format of accepted Matrix .m files:
 ```c
     %%MatrixMarket matrix array integer general
@@ -96,7 +96,7 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
     <value>
 ```
 
-##DESCRIPTION <br />
+## DESCRIPTION <br />
 **piLeib** <br />
 piLeib takes in an integer argument and estimates pi using Leibniz's Series. 
 The result is printed to the console.
@@ -123,7 +123,7 @@ mm takes in a matix .m file, another matirx .m file, and an output file to
 write the resulting matrix to. mm checks to see if the given matrices cna be
 multiplied together.
 
-##RESOURCES <br />
+## RESOURCES <br />
 [Leibniz formula](https://stackoverflow.com/questions/18036367/leibniz-formula-for-%CF%80-is-this-any-good-python "Leibniz formula")
 
 [Checking for valid input](https://stackoverflow.com/questions/17292545/how-to-check-if-the-input-is-a-number-or-not-in-c "Checking for valid input")
