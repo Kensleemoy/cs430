@@ -8,9 +8,6 @@ int main(int argc, char *argv[]) {
     int input;
     char* next;
     long term;
-    int firstT = 0;
-    int secondT = 1;
-    int nextTerm = 0;
     long result = 0;
 
     if (argc == 2) {
@@ -18,16 +15,6 @@ int main(int argc, char *argv[]) {
 
         if ((next != argv[1]) && (*next == '\0') && (input >= 0)) {
             term = (long)input;
-            
-            // for(int i = 0; i <= term; i++) {
-            //     if (i == term) {
-            //         result = firstT;
-            //     }
-            //     nextTerm = firstT + secondT;
-            //     firstT = secondT;
-            //     secondT = nextTerm;
-            // }
-
             result = fib(term);
 
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
