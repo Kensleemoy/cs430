@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <omp.h>
 
+//Declaring function prototypes
 long fib(long n);
 
 int main(int argc, char *argv[]) {
@@ -10,11 +11,17 @@ int main(int argc, char *argv[]) {
     long term;
     long result = 0;
 
+    //Ensuring the correct number of arguments are there
     if (argc == 2) {
+
+        //Grabbing input
         input = strtol(argv[1], &next, 10);
 
+        //Error handling to ensure valid input
         if ((next != argv[1]) && (*next == '\0') && (input >= 0)) {
             term = (long)input;
+
+            //Starts Recursive call
             result = fib(term);
 
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
@@ -24,23 +31,30 @@ int main(int argc, char *argv[]) {
             return -1;
         }
     } else {
-        printf("USAGE: ./fibonacci <natural integer number>= 0>\n");
+        printf("USAGE: ./fibonacci <natural integer number>\n");
         return -1;
     }
 }
 
+//Recursive function
 long fib(long n) {
     long i, j;
+
+    //Stop requirement --> stop creating new threads once n is a low enough value
     if(n <= 1)
         return n;
 
+    //Term 1
     #pragma omp parallel task shared(i) if(n > 33)
     i = fib(n-1);
 
+    //Term 2
     #pragma omp parallel task shared(j) if(n > 33)
     j = fib(n-2);
 
+    //Waiting for tasks to finish before using the returned values
     #pragma omp taskwait
 
+    //Adds term1 + term2
     return i+j;
 }
