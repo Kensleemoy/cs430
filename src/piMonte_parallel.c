@@ -36,13 +36,4 @@ int main(int argc, char **argv) {
 	double pi = (4.0 * sum) / drops;
 	printf("%f\n", pi);
 	return 0;
-
-//	#pragma omp parallel
-//	{
-//	printf("This will print a lot\n");
-//	int rank = omp_get_thread_num();
-//	int n = omp_get_max_threads();
-//        printf("Core #%d out of %d says hello world\n", rank, n);
-//	}
-//	printf("This should print only once\n");
 }
