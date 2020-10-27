@@ -35,7 +35,8 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
    ` ./bin/fibonacci <natural integer number>`
 
 * To run Fibonacci using OpenMP, run:
-    ` ./bin/fib-omp <natural integer number>`
+    ` sbatch slurm_openmp.bash` 
+    To adjust the integer input, edit the slurm_openmp.bash script itself
 
 * To run Matrix-Vector Multiplication, run:
     `./bin/mv <path to matrix .m file> <path to vector .m file> <path to output .m file>`
