@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <omp.h>
 
+long fib(long n);
+
 int main(int argc, char *argv[]) {
     int input;
     char* next;
