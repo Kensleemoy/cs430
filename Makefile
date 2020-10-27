@@ -24,7 +24,7 @@ mm: $(SRC)/mm.c $(LIB)/mmio.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/mm.c $(LIB)/mmio.c -o $(BIN)/mm
 
 fibonacci: $(SRC)/fibonacci.c Makefile
-	$(CC) $(CFLAGS) $(SRC)/fibonacci.c -o $(BIN)/fibonacci
+	$(CC) $(CFLAGS) $(SRC)/fib-openmp.c -o $(BIN)/fib-omp
 
 tests:
 	-$(TEST)/unit_tests.sh test_logs.txt
