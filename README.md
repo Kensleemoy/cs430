@@ -1,5 +1,5 @@
-##AUTHOR <br />
-Kenslee Moy
+##Group 3 <br />
+Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 
 ##INSTALLATION <br />
 **Run all commands from the top level**
