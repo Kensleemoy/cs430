@@ -45,13 +45,13 @@ long fib(long n) {
         return n;
 
     //Term 1
-    #pragma omp parallel task shared(i) if(n > 33)
     // #pragma omp task shared(i)
+    #pragma omp parallel task shared(i) if(n > 33)
     i = fib(n-1);
 
     //Term 2
-    #pragma omp parallel task shared(j) if(n > 33)
     // #pragma omp task shared(j)
+    #pragma omp parallel task shared(j) if(n > 33)
     j = fib(n-2);
 
     //Waiting for tasks to finish before using the returned values
