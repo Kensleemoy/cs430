@@ -1,5 +1,6 @@
 CC		:= gcc
 CFLAGS	:= -std=c99 -Wall -Wextra -g
+OMPFLAGS := -std=c99 -Wall -Wextra -g -fopenmp
 
 BIN		:= ./bin
 SRC		:= ./src
