@@ -9,7 +9,6 @@
 # Generally needed modules:
 module load slurm
 module load gcc
-module load toolchain/foss
 
 #module load matlab/r2020a
 # Execute the program
