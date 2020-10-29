@@ -2,7 +2,7 @@
 
 #SBATCH -J OpenMP_Fib     # job name
 #SBATCH -o log_slurm.o%j  # output and error file name (%j expands to jobID)
-#SBATCH -n 4           # total number of tasks requested
+#SBATCH -n 2           # total number of tasks requested
 #SBATCH -N 1 		  # number of nodes you want to run on	
 #SBATCH -p classroom  # queue (partition) -- defq, eduq, gpuq, shortq
 #SBATCH -t 00:10:00       # run time (hh:mm:ss) - 12.0 hours in this example.
@@ -12,7 +12,7 @@ module load gcc
 
 #module load matlab/r2020a
 # Execute the program
-export OMP_NUM_THREADS=10
+export OMP_NUM_THREADS=2
 ./bin/fib-omp 90
 
 ## Some examples:
