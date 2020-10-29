@@ -22,12 +22,7 @@ int main(int argc, char *argv[]) {
             term = (long)input;
 
             //Starts Recursive call
-            #pragma omp parallel {
-                #pragma omp single {
-                    result = fib(term);
-                }
-
-            }
+            result = fib(term);
 
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
             return 0;

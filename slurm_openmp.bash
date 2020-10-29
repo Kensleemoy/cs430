@@ -8,6 +8,7 @@
 #SBATCH -t 00:10:00       # run time (hh:mm:ss) - 12.0 hours in this example.
 # Generally needed modules:
 module load slurm
+module load gcc
 
 #module load matlab/r2020a
 # Execute the program
