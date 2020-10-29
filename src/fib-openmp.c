@@ -22,6 +22,7 @@ int main(int argc, char *argv[]) {
             term = (long)input;
 
             //Starts Recursive call
+            omp_set_num_threads(input);
             result = fib(term);
 
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
