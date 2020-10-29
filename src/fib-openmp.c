@@ -22,8 +22,10 @@ int main(int argc, char *argv[]) {
             term = (long)input;
 
             //Starts Recursive call
-            #pragma omp parallel shared(term, result) {
-                #pragma omp single {
+            #pragma omp parallel shared(term, result) 
+            {
+                #pragma omp single 
+                {
                     result = fib(term);
                 }
             }
