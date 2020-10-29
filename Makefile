@@ -28,7 +28,7 @@ fibonacci: $(SRC)/fibonacci.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/fibonacci.c -o $(BIN)/fibonacci
 
 fib-omp: $(SRC)/fibonacci.c Makefile
-	$(CC) $(CFLAGS) $(SRC)/fib-openmp.c -o $(BIN)/fib-omp
+	$(CC) $(OMPFLAGS) $(SRC)/fib-openmp.c -o $(BIN)/fib-omp
 
 tests:
 	-$(TEST)/unit_tests.sh test_logs.txt
