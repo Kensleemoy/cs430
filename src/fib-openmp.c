@@ -22,10 +22,14 @@ int main(int argc, char *argv[]) {
             term = (long)input;
 
             //Starts Recursive call
-            result = fib(term);
-
+            #pragma omp parallel shared(term, result) {
+                #pragma omp single {
+                    result = fib(term);
+                }
+            }
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
             return 0;
+            
         } else {
             printf("USAGE: ./fibonacci <natural integer number>\n");
             return -1;
