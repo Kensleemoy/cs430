@@ -9,7 +9,7 @@ OUTPUT	:= ./output
 TEST	:= ./test/
 TESTOUTPUT := ./test/testOutput
 
-all: piLeib piMonte mv mm fibonacci
+all: piLeib piMonte mv mm mm-mpi fibonacci
 
 piLeib: $(SRC)/piLeib.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/piLeib.c -o $(BIN)/piLeib
