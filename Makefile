@@ -25,7 +25,7 @@ mm: $(SRC)/mm.c $(LIB)/mmio.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/mm.c $(LIB)/mmio.c -o $(BIN)/mm
 
 mm-mpi: $(SRC)/mm-mpi.c Makefile
-	$(MPI) $(CFLAGS) $(SRC)/mm-mpi.c -o $(BIN)/mm-mpi
+	$(MPI) $(CFLAGS) $(SRC)/mm-mpi.c -o $(BIN)/mm-mpi -lm
 
 fibonacci: $(SRC)/fibonacci.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/fibonacci.c -o $(BIN)/fibonacci
