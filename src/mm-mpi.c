@@ -5,7 +5,7 @@
 #include <mpi.h>
 #include <time.h>
 
-#define EPS .0000001
+// #define EPS .0000001
 #define COMPARE(V1,V2) V1 < V2 + EPS && V1 > V2 - EPS ? 0 : 1 
 #define ARRAY(D,c,r,i,j) (D)[(i)*(r) + (j)]
 #define ARRAYl(D,c,r,i,j) &((D)[(i)*(r) + (j)])
