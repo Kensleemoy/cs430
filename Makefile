@@ -41,3 +41,4 @@ cleanTests:
 	-rm -f $(TESTOUTPUT)/*
 	-rm -f diff.out
 	-rm -f test_logs.txt
+	-rm -f log_slurm.*
