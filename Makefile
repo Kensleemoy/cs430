@@ -1,5 +1,6 @@
 CC		:= gcc
 CFLAGS	:= -std=c99 -Wall -Wextra -g
+MPI		:= mpicc
 
 BIN		:= ./bin
 SRC		:= ./src
@@ -24,7 +25,7 @@ mm: $(SRC)/mm.c $(LIB)/mmio.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/mm.c $(LIB)/mmio.c -o $(BIN)/mm
 
 mm-mpi: $(SRC)/mm-mpi.c Makefile
-	$(CC) $(CFLAGS) $(SRC)/mm-mpi.c -o $(BIN)/mm-mpi
+	$(MPI) $(CFLAGS) $(SRC)/mm-mpi.c -o $(BIN)/mm-mpi
 
 fibonacci: $(SRC)/fibonacci.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/fibonacci.c -o $(BIN)/fibonacci
