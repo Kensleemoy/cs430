@@ -53,6 +53,8 @@ int main(int argc, char** argv){
                     error++;
                     fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
                 } 
+                    fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
+
                 }
             }
             if(!error){
