@@ -1,5 +1,5 @@
 CC		:= gcc
-CFLAGS	:= -std=c99 -Wall -Wextra -g
+CFLAGS	:= -std=c11 -Wall -Wextra -g
 MPI		:= mpicc
 
 BIN		:= ./bin
