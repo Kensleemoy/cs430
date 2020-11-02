@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <mpi.h>
+#include <time.h>
 
 #define EPS .0000001
 #define COMPARE(V1,V2) V1 < V2 + EPS && V1 > V2 - EPS ? 0 : 1 
@@ -13,61 +14,68 @@ int mm(double* A,int c,int rc,int r,double* B,double* C);
 int cannon_mm(int n, int rank, int Nr, int Nc, double* A, double* B, double* C);
 
 int main(int argc, char** argv){
-    int n, rank;
-  MPI_Status status;
-  int error = MPI_Init(&argc,&argv);
-  MPI_Comm_size(MPI_COMM_WORLD, &n);
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    clock_t start, end;
+    int n, rank, time;
+    MPI_Status status;
+    int error = MPI_Init(&argc,&argv);
+    MPI_Comm_size(MPI_COMM_WORLD, &n);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  // These data are the full global data
-  // We are now only responsible for a portion of the data
-  // Let's grab just our own data for the MM
-  int Nr,Nc,Ncc;
-  Nr = Nc = Ncc = 4;
-  double A[]   = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-  double I[] =   {1,0,0,0,
-                  0,1,0,0,
-                  0,0,1,0, 
-                  0,0,0,1};
-  double C[]   = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    // These data are the full global data
+    // We are now only responsible for a portion of the data
+    // Let's grab just our own data for the MM
+    int Nr,Nc,Ncc;
+    Nr = Nc = Ncc = 4;
+    double A[]   = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+    double I[] =   {1,0,0,0,
+                    0,1,0,0,
+                    0,0,1,0, 
+                    0,0,0,1};
+    double C[]   = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
-  //Actual call to matrix multiply
-  if(cannon_mm(n, rank, Nr, Nc, A, I, C)){
-    fprintf(stderr, "ERROR\n");
-  }else{
-    if(!rank){
-      int error = 0;
-      // Check to see if it is right
-      for(int i = 0; i< Nc; i++){
-        for(int j = 0; j< Nr; j++){
-          if(COMPARE(ARRAY(A,Nc,Nr,i,j),ARRAY(C,Nc,Nr,i,j))){
-            error++;
-            fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
-          } 
+    //Actual call to matrix multiply
+    start = clock();
+    int result = cannon_mm(n, rank, Nr, Nc, A, I, C);
+    end = clock();
+    time = (end - start) * 1000 / CLOCKS_PER_SEC;
+
+    if(result){
+        fprintf(stderr, "ERROR\n");
+    }else{
+        if(!rank){
+            printf("It worked???");
+            // int error = 0;
+            // // Check to see if it is right
+            // for(int i = 0; i< Nc; i++){
+            //     for(int j = 0; j< Nr; j++){
+            //     if(COMPARE(ARRAY(A,Nc,Nr,i,j),ARRAY(C,Nc,Nr,i,j))){
+            //         error++;
+            //         fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
+            //     } 
+            //     }
+            // }
+            // if(!error){
+            //     printf("SUCCESS\n");
+            // }
         }
-      }
-      if(!error){
-        printf("SUCCESS\n");
-      }
     }
-  }
 
-  MPI_Finalize();
+    MPI_Finalize();
 
-  return 0;
-}
-
-int mm(double* A,int c,int rc,int r,double* B,double* C){
-
-  for(int i=0;i<c;i++){
-    for(int j=0;j<r;j++){
-      for(int k=0;k<rc;k++){
-        ARRAY(C,c,r,i,j) += ARRAY(A,c,rc,i,k)*ARRAY(B,rc,r,k,j);
-      }
+    return 0;
     }
-  }
-  return 0;
+
+    int mm(double* A,int c,int rc,int r,double* B,double* C){
+
+    for(int i=0;i<c;i++){
+        for(int j=0;j<r;j++){
+        for(int k=0;k<rc;k++){
+            ARRAY(C,c,r,i,j) += ARRAY(A,c,rc,i,k)*ARRAY(B,rc,r,k,j);
+        }
+        }
+    }
+    return 0;
 }
 
 int cannon_mm(int n, int rank, int Nr, int Nc, double* A, double* B, double* C){

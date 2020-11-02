@@ -23,8 +23,11 @@ mv: $(SRC)/mv.c $(LIB)/mmio.c Makefile
 mm: $(SRC)/mm.c $(LIB)/mmio.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/mm.c $(LIB)/mmio.c -o $(BIN)/mm
 
+mm-mpi: $(SRC)/mm-mpi.c Makefile
+	$(CC) $(CFLAGS) $(SRC)/mm-mpi.c -o $(BIN)/mm-mpi
+
 fibonacci: $(SRC)/fibonacci.c Makefile
-	$(CC) $(CFLAGS) $(SRC)/fib-openmp.c -o $(BIN)/fib-omp
+	$(CC) $(CFLAGS) $(SRC)/fibonacci.c -o $(BIN)/fibonacci
 
 tests:
 	-$(TEST)/unit_tests.sh test_logs.txt
