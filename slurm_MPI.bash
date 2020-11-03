@@ -12,7 +12,7 @@ module load slurm
 
 #module load matlab/r2020a
 # Execute the program
-mpirun -np 16 ./bin/mm-mpi -mpich-dbg=file -mpich-dbg-level=verbose
+mpirun -np 4 ./bin/mm-mpi
 
 ## Some examples:
 # mpirun python3 script.py
