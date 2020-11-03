@@ -38,8 +38,8 @@ int main(int argc, char *argv[]) {
                     // result = fib(term);
                     start = clock();
                     #pragma omp parallel for
-                    for(long i = 0; i <= term; i++) {
-                        if (i == term) {
+                    for(int i = 0; i <= (int)term; i++) {
+                        if (i == (int)term) {
                             result = firstT;
                         }
                         nextTerm = firstT + secondT;
