@@ -14,11 +14,11 @@ int main(int argc, char *argv[]) {
     // long result = 0;
     clock_t start, end;
     int time;
-    int term;
-    int firstT = 0;
-    int secondT = 1;
-    int nextTerm = 0;
-    int result = 0;
+    long term;
+    long firstT = 0;
+    long secondT = 1;
+    long nextTerm = 0;
+    long result = 0;
 
     //Ensuring the correct number of arguments are there
     if (argc == 2) {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
             start = clock();
             #pragma omp parallel for shared(term, result, firstT, secondT, nextTerm)
             for(int i = 0; i <= term; i++) {
-                if (i == term) {
+                if ((long)i == term) {
                     result = firstT;
                 }
                 nextTerm = firstT + secondT;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
             end = clock();
             time = (end - start) * 1000 / CLOCKS_PER_SEC;
             printf("Time: %d\n", time);
-            printf("The [%d] number in the Fibonacci sequence: %d\n", term, result);
+            printf("The [%ld] number in the Fibonacci sequence: %ld\n", term, result);
             return 0;
 
         } else {
