@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
+#include <time.h>
 
 //Declaring function prototypes
 long fib(long n);
@@ -10,6 +11,8 @@ int main(int argc, char *argv[]) {
     char* next;
     long term;
     long result = 0;
+    clock_t start, end;
+    int time;
 
     //Ensuring the correct number of arguments are there
     if (argc == 2) {
@@ -26,9 +29,13 @@ int main(int argc, char *argv[]) {
             {
                 #pragma omp single 
                 {
+                    start = clock();
                     result = fib(term);
+                    end = clock();
+                    time = (end - start) * 1000 / CLOCKS_PER_SEC;
                 }
             }
+            printf("Time: %d\n", time);
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
             return 0;
 
