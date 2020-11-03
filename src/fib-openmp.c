@@ -30,8 +30,6 @@ int main(int argc, char *argv[]) {
         if ((next != argv[1]) && (*next == '\0') && (input >= 0)) {
             term = (long)input;
 
-            // omp_set_num_threads(omp_get_num_procs());
-
             //Start timer
             start = clock();
 
