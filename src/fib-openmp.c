@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
     long result = 0;
     clock_t start, end;
     int time;
-    firstT = 0;
-    secondT = 1;
+    // firstT = 0;
+    // secondT = 1;
 
     //Ensuring the correct number of arguments are there
     if (argc == 2) {
@@ -31,20 +31,24 @@ int main(int argc, char *argv[]) {
 
             //Starts Recursive call
             // #pragma omp parallel shared(term, result) 
-            #pragma omp parallel
+            #pragma omp parallel shared(term, result)
             {
                 // #pragma omp single
                 // {
                     // result = fib(term);
                     start = clock();
                     #pragma omp for
-                    for(long i = 0; i <= term; i++) {
-                        if (i == term) {
-                            result = firstT;
+                    {
+                        firstT = 0;
+                        secondT = 1;
+                        for(long i = 0; i <= term; i++) {
+                            if (i == term) {
+                                result = firstT;
+                            }
+                            nextTerm = firstT + secondT;
+                            firstT = secondT;
+                            secondT = nextTerm;
                         }
-                        nextTerm = firstT + secondT;
-                        firstT = secondT;
-                        secondT = nextTerm;
                     }
                     end = clock();
                     time = (end - start) * 1000 / CLOCKS_PER_SEC;
