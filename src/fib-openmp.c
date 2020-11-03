@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
             // }
 
             start = clock();
-            # pragma omp parallel for num_threads(threads)
+            #pragma omp parallel shared(result, firstT, nextTerm, secondT, term) for num_threads(threads)
             {
                 for(int i = 0; i <= term; i++) {
                     if (i == term) {
