@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
             // #pragma omp parallel shared(term, result) 
             #pragma omp parallel
             {
-                // #pragma omp single 
+                #pragma omp single
                 // {
                     // result = fib(term);
                     start = clock();
