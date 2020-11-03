@@ -31,13 +31,13 @@ int main(int argc, char *argv[]) {
 
             //Starts Recursive call
             // #pragma omp parallel shared(term, result) 
-            #pragma omp parallel shared(term, result, firstT, secondT, nextTerm)
-            {
+            // #pragma omp parallel shared(term, result, firstT, secondT, nextTerm)
+            // {
                 // #pragma omp single
                 // {
                     // result = fib(term);
                     start = clock();
-                    #pragma omp for
+                    #pragma omp parallel for
                     for(long i = 0; i <= term; i++) {
                         if (i == term) {
                             result = firstT;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
                     end = clock();
                     time = (end - start) * 1000 / CLOCKS_PER_SEC;
                 // }
-            }
+            // }
             printf("Time: %d\n", time);
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
             return 0;
