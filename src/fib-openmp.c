@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#import <stdint.h>
+#include <stdint.h>
 #include <omp.h>
 #include <time.h>
 
