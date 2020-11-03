@@ -48,7 +48,11 @@ int main(int argc, char *argv[]) {
 
             //Stop timer
             end = clock();
+
+            //calculate time
             time = ((double)(end - start)) / (double)CLOCKS_PER_SEC;
+
+            //print results
             printf("Time: %f\n", time);
             printf("The [%ld] number in the Fibonacci sequence: %ld\n", term, result);
             return 0;
@@ -61,39 +65,4 @@ int main(int argc, char *argv[]) {
         printf("USAGE: ./fibonacci <natural integer number>\n");
         return -1;
     }
-}
-
-//Recursive function
-long fib(long n) {
-    long i, j;
-
-    //Stop requirement --> stop creating new threads once n is a low enough value
-    if(n <= 1) {
-        return n;
-    } else if(n <= 20) {
-        return(fib(n-1)+fib(n-2));
-    } else {
-        #pragma omp task shared(i)
-            i = fib(n-1);
-        j = fib(n-2);
-        
-        #pragma omp taskwait
-        {
-            return i+j;
-        }
-    }
-    //Term 1
-    // #pragma omp task shared(i)
-    // #pragma omp parallel task shared(i) if(n > 33)
-    
-
-    //Term 2
-    // #pragma omp task shared(j)
-    // #pragma omp parallel task shared(j) if(n > 33)
-    // #pragma omp task shared(j) if(n > 33)
-    // j = fib(n-2);
-
-    //Waiting for tasks to finish before using the returned values
-    //Adds term1 + term2
-    
 }

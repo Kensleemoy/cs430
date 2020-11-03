@@ -14,9 +14,7 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 	
     `make piMonte`
 	
-    `make fibonacci` (serial)
-
-    `make fib-omp` (using OpenMP)
+    `make fibonacci`
 	
     `make mm`
 	
@@ -31,12 +29,8 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 * To run Monte Carlo's Estimation, run:
    ` ./bin/piMonte`
 
-* To run Fibonacci Serially, run:
+* To run Fibonacci, run:
    ` ./bin/fibonacci <natural integer number>`
-
-* To run Fibonacci using OpenMP, run:
-    ` sbatch slurm_openmp.bash` 
-    To adjust the integer input, edit the slurm_openmp.bash script itself
 
 * To run Matrix-Vector Multiplication, run:
     `./bin/mv <path to matrix .m file> <path to vector .m file> <path to output .m file>`
