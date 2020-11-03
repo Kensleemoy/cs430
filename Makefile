@@ -1,6 +1,6 @@
 CC		:= gcc
 CFLAGS	:= -std=c99 -Wall -Wextra -g
-OMPFLAGS := -fopenmp -std=c99 
+OMPFLAG := -fopenmp
 
 BIN		:= ./bin
 SRC		:= ./src
@@ -28,7 +28,7 @@ fibonacci: $(SRC)/fibonacci.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/fibonacci.c -o $(BIN)/fibonacci
 
 fib-omp: $(SRC)/fibonacci.c Makefile
-	$(CC) $(OMPFLAGS) $(SRC)/fib-openmp.c -o $(BIN)/fib-omp
+	$(CC) $(CFLAGS) $(OMPFLAG) $(SRC)/fib-openmp.c -o $(BIN)/fib-omp
 
 tests:
 	-$(TEST)/unit_tests.sh test_logs.txt
