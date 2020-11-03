@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 
             //Starts Recursive call
             // #pragma omp parallel shared(term, result) 
-            #pragma omp parallel shared(term, result, firstT, secondT)
+            #pragma omp parallel shared(term, result, firstT, secondT, nextTerm)
             {
                 // #pragma omp single
                 // {
