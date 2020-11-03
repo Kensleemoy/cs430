@@ -10,7 +10,7 @@ long fib(long n);
 int main(int argc, char *argv[]) {
     int input;
     char* next;
-    long term;
+    long term, nextTerm, firstT, secondT;
     long result = 0;
     clock_t start, end;
     int time;
@@ -28,15 +28,25 @@ int main(int argc, char *argv[]) {
             omp_set_num_threads(omp_get_num_procs());
 
             //Starts Recursive call
-            #pragma omp parallel shared(term, result) 
+            // #pragma omp parallel shared(term, result) 
+            #pragma omp parallel
             {
-                #pragma omp single 
-                {
+                // #pragma omp single 
+                // {
+                    // result = fib(term);
                     start = clock();
-                    result = fib(term);
+                    #pragma omp for
+                    for(long i = 0; i <= term; i++) {
+                        if (i == term) {
+                            result = firstT;
+                        }
+                        nextTerm = firstT + secondT;
+                        firstT = secondT;
+                        secondT = nextTerm;
+                    }
                     end = clock();
                     time = (end - start) * 1000 / CLOCKS_PER_SEC;
-                }
+                // }
             }
             printf("Time: %d\n", time);
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
