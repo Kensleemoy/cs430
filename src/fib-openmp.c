@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#import <stdint.h>
 #include <omp.h>
 #include <time.h>
 
@@ -59,7 +60,7 @@ long fib(long n) {
     } else if(n <= 33) {
         return(fib(n-1)+fib(n-2));
     } else {
-        #pragma omp task shared(i) if(n > 33)
+        #pragma omp task shared(i) if(n > 50)
         {
             i = fib(n-1);
         }
