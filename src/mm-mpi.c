@@ -57,12 +57,10 @@ int main(int argc, char** argv){
             // Check to see if it is right
             for(int i = 0; i< Nc; i++){
                 for(int j = 0; j< Nr; j++){
-                if(COMPARE(ARRAY(A,Nc,Nr,i,j),ARRAY(C,Nc,Nr,i,j))){
-                    error++;
-                    fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
-                } 
-                    //printing for beter
-                    fprintf(stderr,"A[%d,%d] %lf >> C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
+                    if(COMPARE(ARRAY(A,Nc,Nr,i,j),ARRAY(C,Nc,Nr,i,j))){
+                        error++;
+                        fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
+                    } 
                 }
             }
             if(!error){
