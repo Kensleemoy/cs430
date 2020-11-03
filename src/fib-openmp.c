@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
             end = clock();
             time = (end - start) * 1000 / CLOCKS_PER_SEC;
             printf("Time: %d\n", time);
-            printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
+            printf("The [%d] number in the Fibonacci sequence: %d\n", term, result);
             return 0;
 
         } else {
