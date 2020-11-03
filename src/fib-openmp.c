@@ -28,16 +28,12 @@ int main(int argc, char *argv[]) {
             // omp_set_num_threads(omp_get_num_procs());
 
             //Starts Recursive call
+            start = clock();
             #pragma omp parallel shared(term, result) 
-            {
-                #pragma omp single 
-                {
-                    start = clock();
-                    result = fib(term);
-                    end = clock();
-                    time = (end - start) * 1000 / CLOCKS_PER_SEC;
-                }
-            }
+                #pragma omp single
+                result = fib(term);
+            end = clock();
+            time = (end - start) * 1000 / CLOCKS_PER_SEC;
             printf("Time: %d\n", time);
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
             return 0;
