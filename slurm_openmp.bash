@@ -12,8 +12,8 @@ module load gcc
 
 #module load matlab/r2020a
 # Execute the program
-export OMP_NUM_THREADS=90
-./bin/fib-omp 90
+export OMP_NUM_THREADS=4
+./bin/fib-omp 30
 
 ## Some examples:
 # mpirun python3 script.py

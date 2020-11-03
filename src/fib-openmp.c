@@ -60,7 +60,9 @@ long fib(long n) {
         j = fib(n-2);
         
         #pragma omp taskwait
-        return i+j;
+        {
+            return i+j;
+        }
     }
     //Term 1
     // #pragma omp task shared(i)
