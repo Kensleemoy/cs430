@@ -12,7 +12,7 @@ module load slurm
 
 #module load matlab/r2020a
 # Execute the program
-mpirun -np 5 ./bin/mm-mpi
+mpirun -np 4 ./bin/mm-mpi
 
 ## Some examples:
 # mpirun python3 script.py
