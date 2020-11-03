@@ -59,17 +59,15 @@ long fib(long n) {
     //Stop requirement --> stop creating new threads once n is a low enough value
     if(n <= 1) {
         return n;
-    } else if(n <= 50) {
+    } else if(n <= 33) {
         return(fib(n-1)+fib(n-2));
     } else {
-        #pragma omp task shared(i) if(n > 50)
+        #pragma omp task shared(i) if(n > 33)
             i = fib(n-1);
-        j = fib(n-2);
+            j = fib(n-2);
         
         #pragma omp taskwait
-        {
             return i+j;
-        }
     }
     //Term 1
     // #pragma omp task shared(i)
