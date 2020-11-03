@@ -29,9 +29,18 @@ int main(int argc, char *argv[]) {
 
             //Starts Recursive call
             start = clock();
-            #pragma omp parallel shared(term, result) 
-                #pragma omp single
-                result = fib(term);
+            #pragma omp for shared(term, result, firstT, secondT, nextTerm)
+            for(int i = 0; i <= term; i++) {
+                if (i == term) {
+                    result = firstT;
+                }
+                nextTerm = firstT + secondT;
+                firstT = secondT;
+                secondT = nextTerm;
+            }
+            // #pragma omp parallel shared(term, result) 
+            //     #pragma omp single
+            //     result = fib(term);
             end = clock();
             time = (end - start) * 1000 / CLOCKS_PER_SEC;
             printf("Time: %d\n", time);
