@@ -22,11 +22,19 @@ int main(int argc, char** argv){
     MPI_Comm_size(MPI_COMM_WORLD, &n);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    // These data are the full global data
-    // We are now only responsible for a portion of the data
-    // Let's grab just our own data for the MM
     int Nr,Nc,Ncc;
     Nr = Nc = Ncc = 4;
+    //---------testing 5x5 matrices---------//
+    // Nr = Nc = Ncc = 5;
+    // double A[]   = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
+    // double I[] =   {1,0,0,0,0,
+    //                 0,1,0,0,0,
+    //                 0,0,1,0,0, 
+    //                 0,0,0,1,0,
+    //                 0,0,0,0,1};
+    // double C[]   = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+    //---------testing 4x4 matrices---------//
     double A[]   = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
     double I[] =   {1,0,0,0,
                     0,1,0,0,
@@ -35,7 +43,7 @@ int main(int argc, char** argv){
     double C[]   = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
-    //Actual call to matrix multiply
+    //Starting the clock, then timing cannon's matrix multiplication
     start = clock();
     int result = cannon_mm(n, rank, Nr, Nc, A, I, C);
     end = clock();
@@ -53,13 +61,14 @@ int main(int argc, char** argv){
                     error++;
                     fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
                 } 
-                    fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
-
+                    //printing for beter
+                    fprintf(stderr,"A[%d,%d] %lf >> C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
                 }
             }
             if(!error){
                 printf("SUCCESS\n");
             }
+            printf("Time: %d\n", time);
         }
     }
 
