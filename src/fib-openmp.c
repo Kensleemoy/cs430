@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 
             //Starts Recursive call
             start = clock();
-            #pragma omp for shared(term, result, firstT, secondT, nextTerm)
+            #pragma omp parallel for shared(term, result, firstT, secondT, nextTerm)
             for(int i = 0; i <= term; i++) {
                 if (i == term) {
                     result = firstT;
