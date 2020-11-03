@@ -40,7 +40,7 @@ int main(int argc, char** argv){
                     0,1,0,0,
                     0,0,1,0, 
                     0,0,0,1};
-    double C[]   = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    double C[]   = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
     //Starting the clock, then timing cannon's matrix multiplication
