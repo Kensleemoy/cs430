@@ -12,7 +12,7 @@ module load gcc
 
 #module load matlab/r2020a
 # Execute the program
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=90
 ./bin/fib-omp 90
 
 ## Some examples:
