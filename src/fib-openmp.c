@@ -10,12 +10,10 @@ long fib(long n);
 int main(int argc, char *argv[]) {
     int input;
     char* next;
-    long term, nextTerm, firstT, secondT;
+    long term;
     long result = 0;
     clock_t start, end;
     int time;
-    firstT = 0;
-    secondT = 1;
 
     //Ensuring the correct number of arguments are there
     if (argc == 2) {
@@ -30,26 +28,16 @@ int main(int argc, char *argv[]) {
             omp_set_num_threads(omp_get_num_procs());
 
             //Starts Recursive call
-            // #pragma omp parallel shared(term, result) 
-            // #pragma omp parallel shared(term, result, firstT, secondT, nextTerm)
-            // {
-                // #pragma omp single
-                // {
-                    // result = fib(term);
+            #pragma omp parallel shared(term, result) 
+            {
+                #pragma omp single 
+                {
                     start = clock();
-                    #pragma omp parallel for
-                    for(int i = 0; i <= (int)term; i++) {
-                        if (i == (int)term) {
-                            result = firstT;
-                        }
-                        nextTerm = firstT + secondT;
-                        firstT = secondT;
-                        secondT = nextTerm;
-                    }
+                    result = fib(term);
                     end = clock();
                     time = (end - start) * 1000 / CLOCKS_PER_SEC;
-                // }
-            // }
+                }
+            }
             printf("Time: %d\n", time);
             printf("The [%d] number in the Fibonacci sequence: %ld\n", (int)term, result);
             return 0;
@@ -71,15 +59,17 @@ long fib(long n) {
     //Stop requirement --> stop creating new threads once n is a low enough value
     if(n <= 1) {
         return n;
-    } else if(n <= 33) {
+    } else if(n <= 20) {
         return(fib(n-1)+fib(n-2));
     } else {
-        #pragma omp task shared(i) if(n > 33)
+        #pragma omp task shared(i)
             i = fib(n-1);
-            j = fib(n-2);
+        j = fib(n-2);
         
         #pragma omp taskwait
+        {
             return i+j;
+        }
     }
     //Term 1
     // #pragma omp task shared(i)
