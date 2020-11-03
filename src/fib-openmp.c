@@ -63,10 +63,7 @@ long fib(long n) {
         return(fib(n-1)+fib(n-2));
     } else {
         #pragma omp task shared(i) if(n > 50)
-        {
             i = fib(n-1);
-        }
-
         j = fib(n-2);
         
         #pragma omp taskwait
