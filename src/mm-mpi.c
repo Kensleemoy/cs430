@@ -61,7 +61,9 @@ int main(int argc, char** argv){
                     if(COMPARE(ARRAY(A,Nc,Nr,i,j),ARRAY(C,Nc,Nr,i,j))){
                         error++;
                         fprintf(stderr,"A[%d,%d] %lf != C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
-                    } 
+                    } else {
+                        fprintf(stderr,"A[%d,%d] %lf == C[%d,%d] %lf\n",i,j, ARRAY(A,Nc,Nr,i,j),i,j,ARRAY(C,Nc,Nr,i,j));
+                    }
                 }
             }
             if(!error){
