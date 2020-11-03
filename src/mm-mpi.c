@@ -49,7 +49,6 @@ int main(int argc, char** argv){
     int result = cannon_mm(n, rank, Nr, Nc, A, I, C);
     end = clock();
     time = (end - start) * 1000 / CLOCKS_PER_SEC;
-
     if(result){
         fprintf(stderr, "ERROR\n");
     }else{
@@ -69,6 +68,7 @@ int main(int argc, char** argv){
             if(!error){
                 printf("SUCCESS\n");
             }
+            printf("N: %d\n", n);
             printf("Time: %d\n", time);
         }
     }
