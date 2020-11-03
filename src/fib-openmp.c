@@ -10,10 +10,15 @@ long fib(long n);
 int main(int argc, char *argv[]) {
     int input;
     char* next;
-    long term;
-    long result = 0;
+    // long term;
+    // long result = 0;
     clock_t start, end;
     int time;
+    int term;
+    int firstT = 0;
+    int secondT = 1;
+    int nextTerm = 0;
+    int result = 0;
 
     //Ensuring the correct number of arguments are there
     if (argc == 2) {
