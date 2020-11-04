@@ -51,6 +51,18 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
     NOTE: mm will quit if the 1st matrix's column size != 2nd matrix's row size
 
     NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
+    
+* To run Matrix-Vector Multiplication using OpenMP, run:
+    `export OMP_NUM_THREADS=<desired number of threads>`
+    `./bin/mv-openmp <path to matrix .m file> <path to vector .m file> <path to output .m file>`
+	
+	NOTE: mv-openmp will only accept a .m file with the header:
+        `%%MatrixMarket matrix array integer general`
+    and with a column of size 1
+
+    NOTE: mv-openmp will quit if matrix row size != vector column size
+
+    NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
 
 * To clean program, run:
 
@@ -122,6 +134,12 @@ given files can be multiplied together.
 mm takes in a matix .m file, another matirx .m file, and an output file to
 write the resulting matrix to. mm checks to see if the given matrices cna be
 multiplied together.
+
+**mv-openmp** <br />
+mv-openmp uses the number of threads specified by OMP_NUM_THREADS environment variable
+to perform matrix vector multiplication. mv-openmp takes in a matrix .m file, a matrix 
+.m file where the column size is 1, and an output file to write the resulting vector to.
+mv-openmp checks to see if the given files can be multiplied together.
 
 ## RESOURCES <br />
 [Leibniz formula](https://stackoverflow.com/questions/18036367/leibniz-formula-for-%CF%80-is-this-any-good-python "Leibniz formula")

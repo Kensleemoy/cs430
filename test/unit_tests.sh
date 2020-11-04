@@ -94,6 +94,14 @@ else
     addPoint
 fi
 
+if [ ! -x "./bin/mv-openmp" ];then
+    removePoint
+    echo "MAKE: FAIL - no exe named mv in ./bin/" >> $dest
+    exit 1
+else
+    addPoint
+fi
+
 if [ ! -x "./bin/piMonte" ];then
     removePoint
     echo "MAKE: FAIL - no exe named piMonte in ./bin/" >> $dest
@@ -253,6 +261,102 @@ if [ "$?" == 0 ]; then
 else
     removePoint
     echo "ERROR: mv is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+echo >> $dest
+echo "START: Testing Matrix-Vector-OMP Multiply" >> $dest
+export OMP_NUM_THREADS=1
+./bin/mv-openmp ./input/matrix1.m ./input/matrix3.m ./output/outputVector.m
+if [ "$?" == 0 ]; then
+    removePoint
+    echo "ERROR: mv-openmp accepts invalid arguments" >> $dest
+else
+    addPoint
+    echo "---SUCCESS: mv-openmp rejects invalid matrices" >> $dest
+fi
+
+./bin/mv-openmp ./input/matrix1.m hello ./output/outputVector.m
+if [ "$?" == 0 ]; then
+    removePoint 
+    echo "ERROR: mv-openmp accepts invalid arguments" >> $dest
+else
+    addPoint
+    echo "---SUCCESS: mv-openmp rejects invalid matrices" >> $dest
+fi
+
+export OMP_NUM_THREADS=2
+./bin/mv-openmp ./input/matrix1.m ./input/vector1.m ./output/outputVector.m
+diff -i -w -B ./output/outputVector.m $TESTFILES/m1v1output.m >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: 2 thread mv-openmp correctly multiplies matrix x vector" >> $dest
+else
+    removePoint
+    echo "ERROR: 2 thread mv-openmp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+./bin/mv-openmp ./input/matrix3.m ./input/vector2.m ./output/outputVector.m
+diff -i -w -B ./output/outputVector.m $TESTFILES/m3v2output.m >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: 2 thread mv-openmp correctly multiplies matrix x vector" >> $dest
+else
+    removePoint
+    echo "ERROR: 2 thread mv-openmp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+export OMP_NUM_THREADS=4
+./bin/mv-openmp ./input/matrix1.m ./input/vector1.m ./output/outputVector.m
+diff -i -w -B ./output/outputVector.m $TESTFILES/m1v1output.m >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: 4 thread mv-openmp correctly multiplies matrix x vector" >> $dest
+else
+    removePoint
+    echo "ERROR: 4 thread mv-openmp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+./bin/mv-openmp ./input/matrix3.m ./input/vector2.m ./output/outputVector.m
+diff -i -w -B ./output/outputVector.m $TESTFILES/m3v2output.m >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: 4 thread mv-openmp correctly multiplies matrix x vector" >> $dest
+else
+    removePoint
+    echo "ERROR: 4 thread mv-openmp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+export OMP_NUM_THREADS=16
+./bin/mv-openmp ./input/matrix1.m ./input/vector1.m ./output/outputVector.m
+diff -i -w -B ./output/outputVector.m $TESTFILES/m1v1output.m >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: 16 thread mv-openmp correctly multiplies matrix x vector" >> $dest
+else
+    removePoint
+    echo "ERROR: 16 thread mv-openmp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+./bin/mv-openmp ./input/matrix3.m ./input/vector2.m ./output/outputVector.m
+diff -i -w -B ./output/outputVector.m $TESTFILES/m3v2output.m >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: 16 thread mv-openmp correctly multiplies matrix x vector" >> $dest
+else
+    removePoint
+    echo "ERROR: 16 thread mv-openmp is not calculating correctly" >> $dest
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
 
