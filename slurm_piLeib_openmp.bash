@@ -14,7 +14,7 @@ module load slurm
 # Execute the program
 
 #export OMP_NUM_THREADS=28
-./src/piLeib_openmp 1000000000
+./bin/piLeib_openmp 1000000000
 
 ## Some examples:
 # mpirun python3 script.py

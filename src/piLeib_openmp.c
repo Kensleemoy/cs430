@@ -17,14 +17,14 @@ int main(int argc, char *argv[]) {
     double result, sign;
     
     // TH: holds on to partial contribution per thread.
-    double partial_each;
+//  double partial_each;
     double partial_per_thread;
     
     // TH: holds on to thread id.
     int tid;
     
     // TH: holds on to loop contribution per thread.
-    long loop_cnt;
+//  long loop_cnt;
     
     // TH: https://computing.llnl.gov/tutorials/openMP/samples/C/omp_getEnvInfo.c
     // TH: retrieves maximum number of threads available.
@@ -77,18 +77,18 @@ int main(int argc, char *argv[]) {
             
             // TH: https://computing.llnl.gov/tutorials/openMP/samples/C/omp_dotprod_openmp.c
             // TH: invokes parallel threads.
-            #pragma omp parallel shared(upperBound,result,chunk) private(tid, partial_each, partial_per_thread, sign, loop_cnt) num_threads(maxt)
+            #pragma omp parallel shared(upperBound,result,chunk) private(tid, /*partial_each,*/ partial_per_thread, sign/*, loop_cnt*/) num_threads(maxt)
             {
                
                // TH: retrieves OpenMP thread id.
                tid = omp_get_thread_num();
                
                // TH: initializes OpenMP variables per thread.
-               partial_each       = 0.0;
+//             partial_each       = 0.0;
                partial_per_thread = 0.0;
                
                sign     = 1.0;
-               loop_cnt = 0.0;
+//             loop_cnt = 0.0;
                
                // TH: computes partial sum per thread.
                long start_ = (long) (tid*chunk);

@@ -14,7 +14,7 @@ module load slurm
 # Execute the program
 
 #export OMP_NUM_THREADS=28
-./src/piLeib 1000000000
+./bin/piLeib 1000000000
 
 
 ## Some examples:
