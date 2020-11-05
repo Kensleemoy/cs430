@@ -185,6 +185,8 @@ fi
 rm -f ./output/output.txt
 
 # -------------------------------- MONTECARLO OPENMP TESTS  ------------------------------------
+echo >> $dest
+echo "START: Testing Monte Carlo using OpenMP" >> $dest
 sbatch --wait ./slurm_mcopenmp.bash 1000 >> ./output/output.txt
 diff -i -w -B ./log_slurm.txt $TESTFILES/mc1thou.txt >>diff.out
 if [ "$?" == 0 ]; then 
