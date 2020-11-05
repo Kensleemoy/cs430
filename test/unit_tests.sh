@@ -375,7 +375,11 @@ else
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
 
-sbatch --wait slurm_mvopenmp.bash ./input/matrix3.m ./input/vector2.m ./output/outputVector.m
+echo cat ./log_slurm.txt
+
+rm -f ./log_slurm.txt
+
+sbatch --wait slurm_mvopenmp.bash ./input/matrix3.m ./input/vector2.m ./output/outputVector.m 2
 diff -i -w -B ./output/outputVector.m $TESTFILES/m3v2output.m >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -386,6 +390,8 @@ else
     echo "ERROR: 2 thread mv-openmp is not calculating correctly" >> $dest
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
+
+rm -f ./log_slurm.txt
 
 exit 1
 
