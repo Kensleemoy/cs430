@@ -51,7 +51,8 @@ int main(int argc, char *argv[]) {
             time = ((double)(end - start)) / (double)CLOCKS_PER_SEC;
 
             //print results
-            printf("Time: %f\n", time);
+            //Time is commented out for use later
+            // printf("Time: %f\n", time);
             printf("The [%ld] number in the Fibonacci sequence: %ld\n", term, result);
             return 0;
 
