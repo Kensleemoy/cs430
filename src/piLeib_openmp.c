@@ -1,7 +1,7 @@
 #include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/time.h>
+#include <time.h>
 
 #define PERFORMANCE 1
 
@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
             suseconds_t microSecFinal= timerFinal->tv_usec;
             unsigned long finalInMicro = secondsFinal* 1000000 + microSecFinal;
             
-            const char *log_perf  = "log_leibniz_perf.txt";
+            const char *log_perf  = "./output/log_leibniz_perf.txt";
             FILE *f = NULL;
             if ((f = fopen(log_perf, "a")) == NULL) {
                const char * log_error = "log_mmio_error.txt";
