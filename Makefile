@@ -1,5 +1,6 @@
 CC		:= gcc
 CFLAGS	:= -std=c99 -Wall -Wextra -g
+RANDFLAGS := -std=gnu99 -Wall -Wextra -g
 OMPFLAG := -fopenmp
 
 BIN		:= ./bin
@@ -22,7 +23,7 @@ piMonte: $(SRC)/piMonte.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/piMonte.c -o $(BIN)/piMonte
 
 mc-openmp: $(SRC)/mc-openmp.c Makefile
-	$(CC) $(CFLAGS) $(OMPFLAG) $(SRC)/mc-openmp.c -o $(BIN)/mc-openmp
+	$(CC) $(RANDFLAGS) $(OMPFLAG) $(SRC)/mc-openmp.c -o $(BIN)/mc-openmp
 
 mv: $(SRC)/mv.c $(LIB)/mmio.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/mv.c $(LIB)/mmio.c -o $(BIN)/mv
