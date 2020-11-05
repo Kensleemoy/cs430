@@ -120,6 +120,13 @@ else
     addPoint
 fi
 
+if [ ! -x "./bin/mc-openmp" ];then
+    removePoint
+    echo "MAKE: FAIL - no exe named mc-openmp in ./bin/" >> $dest
+    exit 1
+else  
+    addPoint
+fi
 
 # ------------------------------------ LEIBNIZ TESTS  ------------------------------------
 echo "START: Testing Leibniz's Pi Estimation" >> $dest
@@ -176,6 +183,19 @@ else
 fi
 
 rm -f ./output/output.txt
+
+# -------------------------------- MONTECARLO OPENMP TESTS  ------------------------------------
+sbatch --wait ./slurm_mcopenmp.bash 1000 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/mc1.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: Monte Carlo Plotting 1000 points gets: " >> $dest
+else
+    removePoint
+    echo "ERROR: fib-omp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
 
 
 # ------------------------------------ FIBONACCI TESTS  ------------------------------------
