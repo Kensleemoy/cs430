@@ -301,9 +301,10 @@ else
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
 
+# ------------------------------------ MATRIX-MATRIX MULT OPENMP TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing OMP:Matrix-Matrix Multiply" >> $dest
-./bin/omp-mm ./input/matrix1.m ./input/matrix3.m ./output/outputMatrix.m
+sbatch --wait slurm_mm_openmp.bash ./input/matrix1.m ./input/matrix3.m ./output/outputMatrix.m -10
 if [ "$?" == 0 ]; then
     removePoint
     echo "ERROR: mm accepts invalid matrices" >> $dest
@@ -312,7 +313,7 @@ else
     echo "---SUCCESS: mm rejects invalid matrices" >> $dest
 fi
 
-./bin/omp-mm ./input/matrix1.m hello ./output/outputMatrix.m
+sbatch --wait slurm_mm_openmp.bash ./input/matrix1.m hello ./output/outputMatrix.m 10
 if [ "$?" == 0 ]; then
     removePoint 
     echo "ERROR: mm accepts invalid arguments" >> $dest
@@ -321,7 +322,7 @@ else
     echo "---SUCCESS: mm rejects invalid arguments" >> $dest
 fi
 
-./bin/omp-mm ./input/matrix1.m ./input/matrix2.m ./output/outputMatrix.m
+sbatch --wait slurm_mm_openmp.bash ./input/matrix1.m ./input/matrix2.m ./output/outputMatrix.m 10
 diff -i -w -B ./output/outputMatrix.m $TESTFILES/m1m2output.m >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -334,7 +335,7 @@ else
     exit 1
 fi
 
-./bin/omp-mm ./input/matrix3.m ./input/matrix4.m ./output/outputMatrix.m
+sbatch --wait slurm_mm_openmp.bash ./input/matrix3.m ./input/matrix4.m ./output/outputMatrix.m 10
 diff -i -w -B ./output/outputMatrix.m $TESTFILES/m3m4output.m >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
