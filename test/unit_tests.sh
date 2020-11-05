@@ -120,6 +120,13 @@ else
     addPoint
 fi
 
+if [ ! -x "./bin/mc-openmp" ];then
+    removePoint
+    echo "MAKE: FAIL - no exe named mc-openmp in ./bin/" >> $dest
+    exit 1
+else  
+    addPoint
+fi
 
 # ------------------------------------ LEIBNIZ TESTS  ------------------------------------
 echo "START: Testing Leibniz's Pi Estimation" >> $dest
@@ -176,6 +183,9 @@ else
 fi
 
 rm -f ./output/output.txt
+
+# -------------------------------- MONTECARLO OPENMP TESTS  ------------------------------------
+
 
 
 # ------------------------------------ FIBONACCI TESTS  ------------------------------------
