@@ -30,8 +30,10 @@ int main(int argc, char *argv[]) {
             #pragma omp parallel for shared(upperBound, result, sign)
             for(int i=0; i <= (int)upperBound; i++) {
                #pragma omp critical
+               {
                 result += sign/(2.0*((double)i)+1.0);
                 sign = -sign;
+               }
             }
             result = 4*result;
             
