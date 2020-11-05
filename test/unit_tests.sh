@@ -361,24 +361,6 @@ fi
 # ------------------------------------ MATRIX-VECTOR MULT OPENMP TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing Matrix-Vector-OMP Multiply" >> $dest
-export OMP_NUM_THREADS=1
-./bin/mv-openmp ./input/matrix1.m ./input/matrix3.m ./output/outputVector.m
-if [ "$?" == 0 ]; then
-    removePoint
-    echo "ERROR: mv-openmp accepts invalid arguments" >> $dest
-else
-    addPoint
-    echo "---SUCCESS: mv-openmp rejects invalid matrices" >> $dest
-fi
-
-./bin/mv-openmp ./input/matrix1.m hello ./output/outputVector.m
-if [ "$?" == 0 ]; then
-    removePoint 
-    echo "ERROR: mv-openmp accepts invalid arguments" >> $dest
-else
-    addPoint
-    echo "---SUCCESS: mv-openmp rejects invalid matrices" >> $dest
-fi
 
 export OMP_NUM_THREADS=2
 ./bin/mv-openmp ./input/matrix1.m ./input/vector1.m ./output/outputVector.m
