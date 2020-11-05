@@ -9,8 +9,8 @@
 
 # Generally needed modules:
 module load slurm
+module load gcc
 
-#module load matlab/r2020a
 # Execute the program
 
 #export OMP_NUM_THREADS=28
