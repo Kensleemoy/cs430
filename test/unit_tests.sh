@@ -175,12 +175,12 @@ rm -f ./output/output.txt
 echo >> $dest
 echo "START: Testing LEIBNIZ series with OpenMP" >> $dest
 
-sbatch --wait ./slurm_piLeib_openmp.bash 100 ./output/output.txt
+sbatch --wait ./slurm_piLeib_openmp.bash 100 >> ./output/output.txt
 diff -i -w -B ./log_slurm.txt $TESTFILES/piLeib100.txt >>diff.out
 if [ "$?" == 0 ]; then
     addPoint
     rm diff.out
-    echo "---SUCCESS: LEIBNIZ(100) = 1" >> $dest
+    echo "---SUCCESS: LEIBNIZ(100)" >> $dest
 else
 removePoint
 echo "ERROR: LEIBNIZ is not calculating correctly" >> $dest
@@ -190,12 +190,12 @@ fi
 rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
-sbatch --wait ./slurm_piLeib_openmp.bash 1000 ./output/output.txt
+sbatch --wait ./slurm_piLeib_openmp.bash 1000 >> ./output/output.txt
 diff -i -w -B ./log_slurm.txt $TESTFILES/piLeib1000.txt >>diff.out
 if [ "$?" == 0 ]; then
     addPoint
     rm diff.out
-    echo "---SUCCESS: LEIBNIZ(1000) = 1" >> $dest
+    echo "---SUCCESS: LEIBNIZ(1000)" >> $dest
 else
 removePoint
 echo "ERROR: LEIBNIZ is not calculating correctly" >> $dest
