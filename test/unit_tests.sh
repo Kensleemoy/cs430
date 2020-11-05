@@ -537,6 +537,7 @@ fi
 
 rm log_slurm.txt
 
+# ------------------------------------ CLEANING UP AFTER TESTS  ------------------------------------
 echo >> $dest
 echo "CLEANING: ---" >> $dest
 make clean
