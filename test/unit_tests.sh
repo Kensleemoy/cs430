@@ -72,14 +72,6 @@ else
     addPoint
 fi
 
-if [ ! -x "./bin/pileib-openmp" ];then
-    removePoint
-    echo "MAKE: FAIL - no exe named piLeib-openmp in ./bin/" >> $dest
-    exit 1
-else
-    addPoint
-fi
-
 if [ ! -x "./bin/fibonacci" ];then
     removePoint
     echo "MAKE: FAIL - no exe named fibonacci in ./bin/" >> $dest
