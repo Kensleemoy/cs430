@@ -34,6 +34,9 @@ int main(int argc, char *argv[]) {
     // TH: represents chunk size.
     long chunk;
     
+    // TH: represents left-over.
+    long remainder;
+    
     if (!(argc == 2)) {
        printf("USAGE: ./piLeib <integer>\n");
        return -1;
@@ -60,6 +63,9 @@ int main(int argc, char *argv[]) {
             chunk = (upperBound>maxt)?upperBound/maxt:maxt/upperBound;
 //          printf("[main]: chunk == %lu.\n",chunk);
             
+            // TH: updates remainder.
+            remainder = (upperBound>maxt)?upperBound%maxt:0;
+            
             // TH: initializes global 'result' among all threads.
             result  = 0.0;
             sign    = 1.0;
@@ -77,7 +83,7 @@ int main(int argc, char *argv[]) {
             
             // TH: https://computing.llnl.gov/tutorials/openMP/samples/C/omp_dotprod_openmp.c
             // TH: invokes parallel threads.
-            #pragma omp parallel shared(upperBound,result,chunk) private(tid, /*partial_each,*/ partial_per_thread, sign/*, loop_cnt*/) num_threads(maxt)
+            #pragma omp parallel shared(upperBound,result,chunk,remainder) private(tid, /*partial_each,*/ partial_per_thread, sign/*, loop_cnt*/) num_threads(maxt)
             {
                
                // TH: retrieves OpenMP thread id.
@@ -93,10 +99,18 @@ int main(int argc, char *argv[]) {
                // TH: computes partial sum per thread.
                long start_ = (long) (tid*chunk);
                long end_   = (long) (tid*chunk+chunk);
+               
+               if(upperBound>maxt && tid==maxt-1) end_ += remainder;
+               
                for(i=start_; i<end_; i++) {
+                  
+                  // TH: if other threads already handled work load (i.e. more threads than bounds).
+                  if(start_>=upperBound) break;
+                  
                   partial_per_thread  += (sign/((2.0)*((double)i)+1.0));
 //                loop_cnt = i-start_;
                   sign    = (-1) * sign;
+                  
                }//for i.
                
                // TH: computes total sum among threads (i.e.per process).
