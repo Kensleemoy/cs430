@@ -239,7 +239,8 @@ echo >> $dest
 echo "START: Testing Fibonacci with OpenMP" >> $dest
 
 sbatch ./slurm_fibomp.bash hi >> ./output/output.txt
-diff -i -w -B ./output/output.txt $TESTFILES/fib_error.txt >>diff.out
+echo pwd
+diff -i -w -B ./log_slurm.txt $TESTFILES/fib_error.txt >>diff.out
 if [ "$?" == 0 ]; then
     removePoint
     echo "ERROR: fib-omp accepts invalid arguments" >> $dest
