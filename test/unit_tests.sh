@@ -32,9 +32,9 @@ displayFinal() {
     echo
     echo "-----$total out of $maxpts tests PASSED-----"
     if [ "$total" != "$maxpts" ]; then
-        echo "Errors can be found in ./test/testOutput/test_logs.txt"
+        echo "Errors can be found in $dest"
     else 
-        echo "Full Log can be found in ./test/testOutput/test_logs.txt"
+        echo "Full Log can be found in $dest"
     fi
     echo "$total out of $maxpts tests PASSED" >> $dest
 }
