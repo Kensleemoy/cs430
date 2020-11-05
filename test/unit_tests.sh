@@ -179,7 +179,7 @@ if [ "$?" == 0 ]; then
     echo "---SUCCESS: piMonte runs with default value of 10" >> $dest
 else
     removePoint
-    echo "ERROR: piMonte did not run correctly"
+    echo "ERROR: piMonte did not run correctly" >> $dest
 fi
 
 rm -f ./output/output.txt
