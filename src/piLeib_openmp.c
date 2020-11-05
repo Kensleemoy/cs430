@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
 //             struct timeval* timerFinal   = (struct timeval*) malloc(sizeof(struct timeval));
             
 // #endif
-            #pragma omp parallel private(i)
+            #pragma omp parallel
             {  
                #pragma omp for reduction(+:result) schedule(static)
                for(int i=0; i <= (int)upperBound; i++) {
