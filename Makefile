@@ -53,7 +53,4 @@ cleanTests:
 	-rm -f $(TESTOUTPUT)/*
 	-rm -f diff.out
 	-rm -f test_logs.txt
-<<<<<<< HEAD
-=======
 	-rm -f log_slurm.*
->>>>>>> master
