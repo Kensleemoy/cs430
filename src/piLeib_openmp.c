@@ -27,11 +27,12 @@ int main(int argc, char *argv[]) {
 //             struct timeval* timerFinal   = (struct timeval*) malloc(sizeof(struct timeval));
             
 // #endif
-            #pragma omp parallel
+            #pragma omp parallel shared(upperBound, sign)
             {  
-               #pragma omp for reduction(+:result) schedule(static)
+               #pragma omp for reduction(+:result)
                for(int i=0; i <= (int)upperBound; i++) {
                   result += sign/(2.0*((double)i)+1.0);
+                  #pragma omp critical
                   sign = -sign;
                }
             }
