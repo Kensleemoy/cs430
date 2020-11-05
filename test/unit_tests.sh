@@ -239,7 +239,7 @@ echo >> $dest
 echo "START: Testing Fibonacci with OpenMP" >> $dest
 
 sbatch ./slurm_fibomp.bash hi >> ./output/output.txt
-sleep 2
+sleep 5
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib_error.txt >>diff.out
 if [ "$?" == 0 ]; then
     removePoint
@@ -253,7 +253,7 @@ rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
 sbatch ./slurm_fibomp.bash 1 >> ./output/output.txt
-sleep 2
+sleep 5
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib1.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -269,7 +269,7 @@ rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
 sbatch ./slurm_fibomp.bash 3 >> ./output/output.txt
-sleep 1
+sleep 5
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib3.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
