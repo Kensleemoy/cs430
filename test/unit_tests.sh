@@ -32,13 +32,15 @@ displayFinal() {
     echo
     echo "-----$total out of $maxpts tests PASSED-----"
     if [ "$total" != "$maxpts" ]; then
-        echo "Errors can be found in ./test/testOutput/test_logs.txt"
+        echo "Errors can be found in $dest"
     else 
-        echo "Full Log can be found in ./test/testOutput/test_logs.txt"
+        echo "Full Log can be found in $dest"
     fi
     echo "$total out of $maxpts tests PASSED" >> $dest
 }
 
+# ------------------------------------ SETUP TESTS  ------------------------------------
+# These tests will exit and not continue if executable has not been created
 if [ -f $dest ];
 then
     removePoint
@@ -78,6 +80,14 @@ else
     addPoint
 fi
 
+if [ ! -x "./bin/fib-omp" ];then
+    removePoint
+    echo "MAKE: FAIL - no exe named fib-omp in ./bin/" >> $dest
+    exit 1
+else    
+    addPoint
+fi
+
 if [ ! -x "./bin/mm" ];then
     removePoint
     echo "MAKE: FAIL - no exe named mm in ./bin/" >> $dest
@@ -110,6 +120,8 @@ else
     addPoint
 fi
 
+
+# ------------------------------------ LEIBNIZ TESTS  ------------------------------------
 echo "START: Testing Leibniz's Pi Estimation" >> $dest
 ./bin/piLeib hi >> ./output/output.txt
 if [ "$?" == 0 ]
@@ -164,6 +176,8 @@ fi
 
 rm -f ./output/output.txt
 
+
+# ------------------------------------ FIBONACCI TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing Fibonacci" >> $dest
 
@@ -220,6 +234,86 @@ fi
 
 rm -f ./output/output.txt
 
+# ------------------------------------ FIBONACCI OPENMP TESTS  ------------------------------------
+echo >> $dest
+echo "START: Testing Fibonacci with OpenMP" >> $dest
+
+sbatch --wait ./slurm_fibomp.bash 1 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/fib1.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: fibonacci(1) = 1" >> $dest
+else
+    removePoint
+    echo "ERROR: fib-omp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
+
+sbatch --wait ./slurm_fibomp.bash 3 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/fib3.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: fibonacci(3) = 2" >> $dest
+else
+    removePoint
+    echo "ERROR: fib-omp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
+
+sbatch --wait ./slurm_fibomp.bash 10 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/fib10.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: fibonacci(10) = 55" >> $dest
+else
+    removePoint
+    echo "ERROR: fib-omp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
+
+sbatch --wait ./slurm_fibomp.bash 30 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/fib30.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: fibonacci(30) = 832040" >> $dest
+else
+    removePoint
+    echo "ERROR: fib-omp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
+
+sbatch --wait ./slurm_fibomp.bash 90 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/fib90.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: fibonacci(90) = 2880067194370816120" >> $dest
+else
+    removePoint
+    echo "ERROR: fib-omp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
+
+# ------------------------------------ MATRIX-VECTOR MULT TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing Matrix-Vector Multiply" >> $dest
 ./bin/mv ./input/matrix1.m ./input/matrix3.m ./output/outputVector.m
@@ -264,26 +358,9 @@ else
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
 
+# ------------------------------------ MATRIX-VECTOR MULT OPENMP TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing Matrix-Vector-OMP Multiply" >> $dest
-export OMP_NUM_THREADS=1
-./bin/mv-openmp ./input/matrix1.m ./input/matrix3.m ./output/outputVector.m
-if [ "$?" == 0 ]; then
-    removePoint
-    echo "ERROR: mv-openmp accepts invalid arguments" >> $dest
-else
-    addPoint
-    echo "---SUCCESS: mv-openmp rejects invalid matrices" >> $dest
-fi
-
-./bin/mv-openmp ./input/matrix1.m hello ./output/outputVector.m
-if [ "$?" == 0 ]; then
-    removePoint 
-    echo "ERROR: mv-openmp accepts invalid arguments" >> $dest
-else
-    addPoint
-    echo "---SUCCESS: mv-openmp rejects invalid matrices" >> $dest
-fi
 
 export OMP_NUM_THREADS=2
 ./bin/mv-openmp ./input/matrix1.m ./input/vector1.m ./output/outputVector.m
@@ -360,6 +437,7 @@ else
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
 
+# ------------------------------------ MATRIX-MATRIX MULT TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing Matrix-Matrix Multiply" >> $dest
 ./bin/mm ./input/matrix1.m ./input/matrix3.m ./output/outputMatrix.m
