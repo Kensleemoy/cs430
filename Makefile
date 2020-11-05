@@ -15,7 +15,7 @@ piLeib: $(SRC)/piLeib.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/piLeib.c -o $(BIN)/piLeib
 
 piLeib_openmp: $(SRC)/piLeib_openmp.c Makefile
-	$(CC) $(CFLAGS) -fopenmp $(SRC)/piLeib_openmp.c -o $(BIN)/piLeib_openmp
+	$(CC) $(CFLAGS) $(OMPFLAG) $(SRC)/piLeib_openmp.c -o $(BIN)/piLeib_openmp
 
 piMonte: $(SRC)/piMonte.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/piMonte.c -o $(BIN)/piMonte
