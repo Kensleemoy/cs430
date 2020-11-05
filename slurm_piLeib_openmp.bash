@@ -13,8 +13,8 @@ module load gcc
 
 # Execute the program
 
-#export OMP_NUM_THREADS=28
-./bin/piLeib_openmp $1
+export OMP_NUM_THREADS=16
+./bin/piLeib-openmp $1
 
 ## Some examples:
 # mpirun python3 script.py

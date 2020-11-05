@@ -16,8 +16,8 @@ all: piLeib piMonte mv mm omp-mm fibonacci mc-openmp mv-openmp piLeib_openmp fib
 piLeib: $(SRC)/piLeib.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/piLeib.c -o $(BIN)/piLeib
 
-piLeib_openmp: $(SRC)/piLeib_openmp.c Makefile
-	$(CC) $(RANDFLAGS) $(OMPFLAG) $(SRC)/piLeib_openmp.c -o $(BIN)/piLeib_openmp
+piLeib-openmp: $(SRC)/piLeib-openmp.c Makefile
+	$(CC) $(RANDFLAGS) $(OMPFLAG) $(SRC)/piLeib-openmp.c -o $(BIN)/piLeib-openmp
 
 piMonte: $(SRC)/piMonte.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/piMonte.c -o $(BIN)/piMonte

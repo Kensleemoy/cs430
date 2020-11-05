@@ -11,6 +11,8 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 * To compile a single program, run any of these options:
 
     `make piLeib`
+
+    `make piLeib-openmp`
 	
     `make piMonte`
 
@@ -33,6 +35,9 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 
 * To run Leibniz's Estimation, run:
    ` ./bin/piLeib <integer>`
+
+* To run Leibniz's Estimation using OpenMP, run:
+   ` sbatch slurm_piLeib_openmp.bash`
 
 * To run Monte Carlo's Estimation, run:
    ` ./bin/piMonte`
@@ -136,6 +141,11 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 **piLeib** <br />
 piLeib takes in an integer argument and estimates pi using Leibniz's Series. 
 The result is printed to the console.
+
+**piLeib-openmp** <br />
+piLeib takes in an integer argument and estimates pi using Leibniz's Series. 
+OpenMP is used to share the workload of the for-loop and reduce the result into
+the chose variable. The result is printed to the console.
 
 **piMonte** <br />
 piMonte takes no parameters. It estimates pi using Monte Carlo's Pi
