@@ -22,12 +22,13 @@ int main(int argc, char **argv) {
 	double x = 0.0;
 	double y = 0.0;
 	int i;
+	unsigned int seed = 3141592653;
 	srand(3141592653);
 	
-	#pragma omp parallel for private(x, y) reduction(+:sum) 
+	#pragma omp parallel for private(x, y, seed) reduction(+:sum) 
 	for (i=0; i < drops; i++) {
-		x = rand()%(10000+1);
-		y = rand()%(10000+1);
+		x = rand_r(&seed)%(10000+1);
+		y = rand_r(&seed)%(10000+1);
 		if ( (x*x)+(y*y) <= (10000*10000) ) {
 			sum += 1;
 		}
