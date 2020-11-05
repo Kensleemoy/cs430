@@ -1,0 +1,1 @@
+USAGE: ./fibonacci <natural integer number>

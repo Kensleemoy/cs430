@@ -239,6 +239,7 @@ echo >> $dest
 echo "START: Testing Fibonacci with OpenMP" >> $dest
 
 sbatch ./slurm_fibomp.bash hi >> ./output/output.txt
+diff -i -w -B ./output/output.txt $TESTFILES/fib_error.txt >>diff.out
 if [ "$?" == 0 ]; then
     removePoint
     echo "ERROR: fib-omp accepts invalid arguments" >> $dest
@@ -253,6 +254,7 @@ rm -f ./log_slurm.txt
 sbatch ./slurm_fibomp.bash 1 >> ./output/output.txt
 sleep 1
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib1.txt >>diff.out
+exit 1
 if [ "$?" == 0 ]; then 
     addPoint
     rm diff.out
@@ -329,8 +331,6 @@ fi
 
 rm -f ./output/output.txt
 rm -f ./log_slurm.txt
-
-exit 1
 
 # ------------------------------------ MATRIX-VECTOR MULT TESTS  ------------------------------------
 echo >> $dest
