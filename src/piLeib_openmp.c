@@ -1,75 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-
-#define PERFORMANCE 0
+#include <omp.h>
 
 int main(int argc, char *argv[]) {
-    int input;
-    char* next;
-    double upperBound, result, sign;
-
-    if (argc == 2) {
-        input = strtol(argv[1], &next, 10);
-
-        if ((next != argv[1]) && (*next == '\0')) {
-            upperBound = input;
-            result = 0.0;
-            sign = 1.0;
-            
-// #if (PERFORMANCE == 1)
-            
-//             struct timeval* timerInitial = (struct timeval*) malloc(sizeof(struct timeval));
-//             gettimeofday(timerInitial,NULL);
-//             time_t secondsInitial = timerInitial->tv_sec;
-//             suseconds_t microSecInitial = timerInitial->tv_usec;
-//             unsigned long initialInMicro = secondsInitial * 1000000 + microSecInitial;
-//             struct timeval* timerFinal   = (struct timeval*) malloc(sizeof(struct timeval));
-            
-// #endif
-            #pragma omp parallel shared(upperBound, sign)
-            {  
-               #pragma omp for reduction(+:result)
-               for(int i=0; i <= (int)upperBound; i++) {
-                  result += sign/(2.0*((double)i)+1.0);
-                  #pragma omp critical
-                  sign = -sign;
-               }
-            }
-            result = 4*result;
-            
-// #if (PERFORMANCE == 1)
-            
-//             gettimeofday(timerFinal,NULL);
-//             time_t secondsFinal = timerFinal->tv_sec;
-//             suseconds_t microSecFinal= timerFinal->tv_usec;
-//             unsigned long finalInMicro = secondsFinal* 1000000 + microSecFinal;
-            
-//             const char *log_perf  = "log_leibniz_perf.txt";
-//             FILE *f = NULL;
-            
-//             if ((f = fopen(log_perf, "a")) == NULL) {
-//                const char * log_error = "log_mmio_error.txt";
-//                FILE * log_file = fopen (log_error , "a");
-//                fprintf(log_file, "Usage: %s could NOT be written.\n", log_perf);
-//                fclose (log_file);
-//                return 1;
-//             }//if NULL.
-            
-//             fprintf(f, "Leibniz, Single-Threaded (msec) == %lu\n", (finalInMicro-initialInMicro));
-//             fclose(f);
-            
-// #endif
-            printf("%lf\n", result);
-            return 0;
-        } else {
-            printf("USAGE: ./piLeib <integer>\n");
-            return -1;
-        }
-    } else {
-        printf("USAGE: ./piLeib <integer>\n");
+    if(argc != 2) {
         return -1;
     }
+
+    int n = atoi(argv[1]);
+    if(strncmp(argv[1], "0", 1) != 0 && n==0) {
+        return -1;
+    } 
+    if(n<0) {
+        fprintf(stderr, "index must be be greater than or equal to 0\n");
+        return -1;
+    }
+    
+    double pi = 1.0;
+
+    int i = 3;
+    int j = 0;
+
+    #pragma omp parallel for private(i, j) reduction(+:pi)
+    for(i=3; i <= n; i++) {
+        if(i%2 == 1) {
+            if(j%2 == 0) {
+                pi = pi - (1.0/(double)i);
+                j++;
+            } else {
+                pi = pi + (1.0/(double)i);
+                j++;
+            }
+        }
+    }
+
+    pi = pi*4;
+    printf("%1.6f",pi);
+    return 0;
 }
-
-
