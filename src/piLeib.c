@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/time.h>
+#include <time.h>
 
-#define PERFORMANCE 1
+#define PERFORMANCE 0
 
 int main(int argc, char *argv[]) {
     int input;
