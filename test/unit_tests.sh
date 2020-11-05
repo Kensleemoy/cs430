@@ -238,8 +238,7 @@ rm -f ./output/output.txt
 echo >> $dest
 echo "START: Testing Fibonacci with OpenMP" >> $dest
 
-sbatch ./slurm_fibomp.bash 1 >> ./output/output.txt
-sleep 3
+sbatch --wait ./slurm_fibomp.bash 1 >> ./output/output.txt
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib1.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -254,8 +253,7 @@ fi
 rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
-sbatch ./slurm_fibomp.bash 3 >> ./output/output.txt
-sleep 3
+sbatch --wait ./slurm_fibomp.bash 3 >> ./output/output.txt
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib3.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -270,8 +268,7 @@ fi
 rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
-sbatch ./slurm_fibomp.bash 10 >> ./output/output.txt
-sleep 4
+sbatch --wait ./slurm_fibomp.bash 10 >> ./output/output.txt
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib10.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -286,8 +283,7 @@ fi
 rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
-sbatch ./slurm_fibomp.bash 30 >> ./output/output.txt
-sleep 5
+sbatch --wait ./slurm_fibomp.bash 30 >> ./output/output.txt
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib30.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -302,8 +298,7 @@ fi
 rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
-sbatch ./slurm_fibomp.bash 90 >> ./output/output.txt
-sleep 5
+sbatch --wait ./slurm_fibomp.bash 90 >> ./output/output.txt
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib90.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
