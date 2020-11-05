@@ -330,6 +330,8 @@ fi
 rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
+exit 1
+
 # ------------------------------------ MATRIX-VECTOR MULT TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing Matrix-Vector Multiply" >> $dest
