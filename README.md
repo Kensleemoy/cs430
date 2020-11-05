@@ -13,6 +13,8 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
     `make piLeib`
 	
     `make piMonte`
+
+    `make mc-openmp`
 	
     `make fibonacci`
 
@@ -32,6 +34,9 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 
 * To run Monte Carlo's Estimation, run:
    ` ./bin/piMonte`
+
+* To run Monte Carlo's Estimation using OpenMP, run:
+   ` sbatch slurm_mcopenmp.bash <natural long number>`
 
 * To run Fibonacci, run:
    ` ./bin/fibonacci <natural integer number>`
@@ -86,7 +91,7 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 **Run all commands from the top level**
 
 * To test the toy problems, run: <br />
-   ` make test`
+   ` make tests`
 
    NOTE: this will place all test logs in a top-level file called "test_logs.txt"
 
@@ -125,6 +130,11 @@ piMonte takes no parameters. It estimates pi using Monte Carlo's Pi
 Estimation based upon 10 (hypothetical) darts. The result is printed to
 the console.
 
+**mc-openmp** <br />
+mc-openmp takes in one parameter that tells the program how many darts to throw.
+It estimates pi using Monte Carlo's Pi Estimation based upon the specified number
+of darts. The result is printed to the console.
+
 **fibonacci** <br />
 fibonacci takes in a natural integer argument and calculates the nth
 number in the Fibonacci sequence, based upon the given argument. The result
@@ -160,6 +170,8 @@ multiplied together.
 [Checking for valid input](https://stackoverflow.com/questions/17292545/how-to-check-if-the-input-is-a-number-or-not-in-c "Checking for valid input")
 
 [Monte Carlo formula](https://www.geeksforgeeks.org/estimating-value-pi-using-monte-carlo/ "Monte Carlo formula")
+
+[Thread safe Pseudo-Random Number Generator](https://linux.die.net/man/3/rand_r "rand_r")
 
 [Fibonacci formula](https://www.programiz.com/c-programming/examples/fibonacci-series "Fibonacci formula")
 
