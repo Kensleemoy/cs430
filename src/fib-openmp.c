@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     // long term;
     // long result = 0;
     clock_t start, end;
-    double time;
+    // double time;         //this will be used for timing for the report
     long term;
     long firstT = 0;
     long secondT = 1;
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
             end = clock();
 
             //calculate time
-            time = ((double)(end - start)) / (double)CLOCKS_PER_SEC;
+            // time = ((double)(end - start)) / (double)CLOCKS_PER_SEC;
 
             //print results
             //Time is commented out for use later
