@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH -J OpenMP_TEST     # job name
-#SBATCH -o log_slurm.o%j  # output and error file name (%j expands to jobID)
+#SBATCH -J OpenMP_MC     # job name
+#SBATCH -o log_slurm.txt  # output and error file name (%j expands to jobID)
 #SBATCH -n 4           # total number of tasks requested
 #SBATCH -N 1 		  # number of nodes you want to run on	
 #SBATCH -p classroom  # queue (partition) -- defq, eduq, gpuq, shortq
