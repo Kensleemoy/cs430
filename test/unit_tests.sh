@@ -176,7 +176,7 @@ echo >> $dest
 echo "START: Testing LEIBNIZ series with OpenMP" >> $dest
 
 sbatch --wait ./slurm_piLeib_openmp.bash 100 >> ./output/output.txt
-diff -i -w -B ./log_slurm.txt $TESTFILES/piLeib100.txt >>diff.out
+diff -i -w -B ./log_slurm.txt $TESTFILES/leib100.txt >>diff.out
 if [ "$?" == 0 ]; then
     addPoint
     rm diff.out
@@ -191,7 +191,7 @@ rm -f ./output/output.txt
 rm -f ./log_slurm.txt
 
 sbatch --wait ./slurm_piLeib_openmp.bash 1000 >> ./output/output.txt
-diff -i -w -B ./log_slurm.txt $TESTFILES/piLeib1000.txt >>diff.out
+diff -i -w -B ./log_slurm.txt $TESTFILES/leib1000.txt >>diff.out
 if [ "$?" == 0 ]; then
     addPoint
     rm diff.out
