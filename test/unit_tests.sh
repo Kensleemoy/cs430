@@ -250,7 +250,7 @@ fi
 rm -f ./output/output.txt
 
 sbatch ./slurm_fibomp.bash 1 >> ./output/output.txt
-diff -i -w -B ./output/output.txt $TESTFILES/fib1.txt >>diff.out
+diff -i -w -B log_slurm.txt $TESTFILES/fib1.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
     rm diff.out
@@ -264,7 +264,7 @@ fi
 rm -f ./output/output.txt
 
 sbatch ./slurm_fibomp.bash 3 >> ./output/output.txt
-diff -i -w -B ./output/output.txt $TESTFILES/fib3.txt >>diff.out
+diff -i -w -B log_slurm.txt $TESTFILES/fib3.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
     rm diff.out
@@ -278,7 +278,7 @@ fi
 rm -f ./output/output.txt
 
 sbatch ./slurm_fibomp.bash 10 >> ./output/output.txt
-diff -i -w -B ./output/output.txt $TESTFILES/fib10.txt >>diff.out
+diff -i -w -B log_slurm.txt $TESTFILES/fib10.txt >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
     rm diff.out
