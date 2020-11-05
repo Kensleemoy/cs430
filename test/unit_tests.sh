@@ -239,7 +239,7 @@ echo >> $dest
 echo "START: Testing Fibonacci with OpenMP" >> $dest
 
 sbatch ./slurm_fibomp.bash hi >> ./output/output.txt
-echo pwd
+echo pwd >> $dest
 diff -i -w -B ./log_slurm.txt $TESTFILES/fib_error.txt >>diff.out
 if [ "$?" == 0 ]; then
     removePoint
