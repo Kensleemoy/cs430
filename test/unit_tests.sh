@@ -163,6 +163,7 @@ fi
 
 rm -f ./output/output.txt
 
+# ------------------------------------ MONTECARLO TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing Monte Carlo's Pi Estimation" >> $dest
 ./bin/piMonte >> ./output/output.txt
