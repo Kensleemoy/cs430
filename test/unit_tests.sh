@@ -55,7 +55,7 @@ echo
 echo "***unit_tests.sh -- running tests***"
 echo
 
-make
+make all
 if [ ! $? -eq 0 ];then
     removePoint
     echo "unit_tests: FAIL - make returned non-zero"  >> $dest
@@ -114,7 +114,7 @@ fi
 
 if [ ! -x "./bin/mv-openmp" ];then
     removePoint
-    echo "MAKE: FAIL - no exe named mv in ./bin/" >> $dest
+    echo "MAKE: FAIL - no exe named mv-omp in ./bin/" >> $dest
     exit 1
 else
     addPoint
