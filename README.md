@@ -15,10 +15,14 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
     `make piMonte`
 	
     `make fibonacci`
+
+    `make fib-omp`
 	
     `make mm`
 	
     `make mv`
+
+    `make mv-openmp`
 
 ## EXECUTION <br />
 **Run all commands from the top level**
@@ -31,6 +35,9 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 
 * To run Fibonacci, run:
    ` ./bin/fibonacci <natural integer number>`
+
+* To run Fibonacci using OpenMP, run:
+    ` sbatch slurm_fibomp.bash <natural integer number>`
 
 * To run Matrix-Vector Multiplication, run:
     `./bin/mv <path to matrix .m file> <path to vector .m file> <path to output .m file>`
@@ -125,21 +132,27 @@ is printed to the console.
 NOTE: Fibonacci starts at fib(0) = 0, so to calculate the 
 3rd term, it will display terms 0, 1, 1, 2, 3 to give you the fib(3) = 2.
 
+**fib-omp** <br />
+fib-omp takes in a natural integer argument and calculated the nth number in
+the Fibonacci sequence. This calculates it sequentially starting with Fib(0)
+and Fib(1) all the way to Fib(n) and shares the work using OpenMP parallel.
+The result is then put into a log_slurm.txt file.
+
 **mv** <br />
 mv takes in a matrix .m file, a matrix .m file where the column size is 1, 
 and an output file to write the resulting vector to. mv checks to see if the
 given files can be multiplied together.
-
-**mm** <br />
-mm takes in a matix .m file, another matirx .m file, and an output file to
-write the resulting matrix to. mm checks to see if the given matrices cna be
-multiplied together.
 
 **mv-openmp** <br />
 mv-openmp uses the number of threads specified by OMP_NUM_THREADS environment variable
 to perform matrix vector multiplication. mv-openmp takes in a matrix .m file, a matrix 
 .m file where the column size is 1, and an output file to write the resulting vector to.
 mv-openmp checks to see if the given files can be multiplied together.
+
+**mm** <br />
+mm takes in a matix .m file, another matirx .m file, and an output file to
+write the resulting matrix to. mm checks to see if the given matrices cna be
+multiplied together.
 
 ## RESOURCES <br />
 [Leibniz formula](https://stackoverflow.com/questions/18036367/leibniz-formula-for-%CF%80-is-this-any-good-python "Leibniz formula")
