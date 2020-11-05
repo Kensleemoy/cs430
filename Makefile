@@ -11,7 +11,7 @@ OUTPUT	:= ./output
 TEST	:= ./test/
 TESTOUTPUT := ./test/testOutput
 
-all: piLeib piMonte mv mm omp-mm fibonacci mc-openmp mv-openmp piLeib_openmp fib-omp
+all: piLeib piMonte mv mm omp-mm fibonacci mc-openmp mv-openmp piLeib-openmp fib-omp
 
 piLeib: $(SRC)/piLeib.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/piLeib.c -o $(BIN)/piLeib
