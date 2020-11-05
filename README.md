@@ -21,6 +21,8 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
     `make fib-omp`
 	
     `make mm`
+
+    `make omp-mm`
 	
     `make mv`
 
@@ -66,13 +68,21 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
     
 * To run Matrix-Vector Multiplication using OpenMP, run:
     `export OMP_NUM_THREADS=<desired number of threads>`
-    `./bin/mv-openmp <path to matrix .m file> <path to vector .m file> <path to output .m file>`
+    `sbatch slurm_mvopenmp.bash <path to matrix .m file> <path to vector .m file> <path to output .m file> <num_threads>`
 	
 	NOTE: mv-openmp will only accept a .m file with the header:
         `%%MatrixMarket matrix array integer general`
     and with a column of size 1
 
     NOTE: mv-openmp will quit if matrix row size != vector column size
+
+    NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
+
+* To run Matrix-Matrix Multiplication using OpenMP, run:
+
+    `sbatch slurm_mm_openmp.bash <path to 1st matrix .m file> <path to 2nd matrix.m file> <path to output .m file> <num_threads>`
+
+    NOTE: omp-mm will quit if the 1st matrix's column size != 2nd matrix's row size
 
     NOTE: example acceptable files are provided in ./input/ or in the "format" secion of this README
 
@@ -91,9 +101,11 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
 **Run all commands from the top level**
 
 * To test the toy problems, run: <br />
-   ` make tests`
+   ` ./test/unit_tests.sh <output file>`
 
-   NOTE: this will place all test logs in a top-level file called "test_logs.txt"
+   NOTE: it is recommended to run a `make clean` before running the tests
+
+   NOTE: this will place all test logs in a top-level file in your specified file name
 
    NOTE: errors documents will be placed into test/testOutput/
 
@@ -160,9 +172,15 @@ to perform matrix vector multiplication. mv-openmp takes in a matrix .m file, a 
 mv-openmp checks to see if the given files can be multiplied together.
 
 **mm** <br />
-mm takes in a matix .m file, another matirx .m file, and an output file to
+mm takes in a matix .m file, another matrix .m file, and an output file to
 write the resulting matrix to. mm checks to see if the given matrices cna be
 multiplied together.
+
+**omp-mm** <br />
+omp-mm takes in a matix .m file, another matirx .m file, and an output file to
+write the resulting matrix to. omp-mm checks to see if the given matrices can be
+multiplied together. Once valid matrices are read in, the program shares the work
+via OpenMP parallel for actually multiplying the matrices themselves.
 
 ## RESOURCES <br />
 [Leibniz formula](https://stackoverflow.com/questions/18036367/leibniz-formula-for-%CF%80-is-this-any-good-python "Leibniz formula")
