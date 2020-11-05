@@ -35,6 +35,6 @@ int main(int argc, char **argv) {
 	}
 
 	double pi = (4.0 * sum) / drops;
-	printf("%f\n", pi);
+	printf("%f", pi);
 	return 0;
 }

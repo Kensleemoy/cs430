@@ -214,14 +214,58 @@ if [ "$?" == 0 ]; then
     echo "---SUCCESS: piMonte runs with default value of 10" >> $dest
 else
     removePoint
-    echo "ERROR: piMonte did not run correctly"
+    echo "ERROR: piMonte did not run correctly" >> $dest
 fi
 
 rm -f ./output/output.txt
 
 # -------------------------------- MONTECARLO OPENMP TESTS  ------------------------------------
+echo >> $dest
+echo "START: Testing Monte Carlo using OpenMP" >> $dest
+sbatch --wait ./slurm_mcopenmp.bash 1000 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/mc1thou.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: Monte Carlo Plotting 1000 points gets: 3.108000 " >> $dest
+else
+    removePoint
+    echo "ERROR: mc-openmp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
 
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
 
+sbatch --wait ./slurm_mcopenmp.bash 1000000 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/mc1mil.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: Monte Carlo Plotting 1,000,000 points gets: 3.141476 " >> $dest
+else
+    removePoint
+    echo "ERROR: mc-openmp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
+
+sbatch --wait ./slurm_mcopenmp.bash 9999999 >> ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/mcalmost10mil.txt >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: Monte Carlo Plotting 9,999,999 points gets: 3.141830 " >> $dest
+else
+    removePoint
+    echo "ERROR: mc-openmp is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
 
 # ------------------------------------ FIBONACCI TESTS  ------------------------------------
 echo >> $dest
@@ -539,6 +583,40 @@ else
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
 
+# ------------------------------------ MATRIX-MATRIX MULT OPENMP TESTS  ------------------------------------
+echo >> $dest
+echo "START: Testing OMP:Matrix-Matrix Multiply" >> $dest
+
+sbatch --wait slurm_mm_openmp.bash ./input/matrix1.m ./input/matrix2.m ./output/outputMatrix.m 10
+diff -i -w -B ./output/outputMatrix.m $TESTFILES/m1m2output.m >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: mm correctly multiplies matrix x matrix" >> $dest
+else
+    removePoint
+    echo "ERROR: mm is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+    exit 1
+fi
+
+rm log_slurm.txt
+
+sbatch --wait slurm_mm_openmp.bash ./input/matrix3.m ./input/matrix4.m ./output/outputMatrix.m 10
+diff -i -w -B ./output/outputMatrix.m $TESTFILES/m3m4output.m >>diff.out
+if [ "$?" == 0 ]; then 
+    addPoint
+    rm diff.out
+    echo "---SUCCESS: mm correctly multiplies matrix x matrix" >> $dest
+else
+    removePoint
+    echo "ERROR: mm is not calculating correctly" >> $dest
+    echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm log_slurm.txt
+
+# ------------------------------------ CLEANING UP AFTER TESTS  ------------------------------------
 echo >> $dest
 echo "CLEANING: ---" >> $dest
 make clean
