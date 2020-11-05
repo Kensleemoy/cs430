@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH -J OpenMP_TEST     # job name
-#SBATCH -o log_slurm.o%j   # output and error file name (%j expands to jobID)
+#SBATCH -o log_slurm.txt   # output and error file name (%j expands to jobID)
 #SBATCH -n 4               # total number of tasks requested
 #SBATCH -N 1 		   # number of nodes you want to run on	
 #SBATCH -p classroom       # queue (partition) -- defq, eduq, gpuq, shortq
@@ -14,7 +14,7 @@ module load slurm
 # Execute the program
 
 #export OMP_NUM_THREADS=28
-./bin/piLeib_openmp 1000000000
+./bin/piLeib_openmp "$1"
 
 ## Some examples:
 # mpirun python3 script.py

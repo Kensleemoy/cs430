@@ -170,6 +170,41 @@ fi
 
 rm -f ./output/output.txt
 
+# ------------------------------------ LEIBNIZ OPENMP TESTS  --------------------------------
+
+echo >> $dest
+echo "START: Testing LEIBNIZ series with OpenMP" >> $dest
+
+sbatch --wait ./slurm_piLeib_openmp.bash 100 ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/piLeib100.txt >>diff.out
+if [ "$?" == 0 ]; then
+addPoint
+rm diff.out
+echo "---SUCCESS: LEIBNIZ(100) = 1" >> $dest
+else
+removePoint
+echo "ERROR: LEIBNIZ is not calculating correctly" >> $dest
+echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
+
+sbatch --wait ./slurm_piLeib_openmp.bash 1000 ./output/output.txt
+diff -i -w -B ./log_slurm.txt $TESTFILES/piLeib1000.txt >>diff.out
+if [ "$?" == 0 ]; then
+addPoint
+rm diff.out
+echo "---SUCCESS: LEIBNIZ(1000) = 1" >> $dest
+else
+removePoint
+echo "ERROR: LEIBNIZ is not calculating correctly" >> $dest
+echo "Note: The diff result is in ./diff.out" >> $dest
+fi
+
+rm -f ./output/output.txt
+rm -f ./log_slurm.txt
+
 # ------------------------------------ MONTECARLO TESTS  ------------------------------------
 echo >> $dest
 echo "START: Testing Monte Carlo's Pi Estimation" >> $dest

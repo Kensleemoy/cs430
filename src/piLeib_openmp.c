@@ -17,19 +17,19 @@ int main(int argc, char *argv[]) {
     double result, sign;
     
     // TH: holds on to partial contribution per thread.
-//  double partial_each;
+    double partial_each;
     double partial_per_thread;
     
     // TH: holds on to thread id.
     int tid;
     
     // TH: holds on to loop contribution per thread.
-//  long loop_cnt;
+    long loop_cnt;
     
     // TH: https://computing.llnl.gov/tutorials/openMP/samples/C/omp_getEnvInfo.c
     // TH: retrieves maximum number of threads available.
     int maxt = omp_get_max_threads();
-//  printf("[main]: max threads == %d.\n",maxt);
+    printf("[main]: max threads == %d.\n",maxt);
     
     // TH: represents chunk size.
     long chunk;
@@ -61,10 +61,11 @@ int main(int argc, char *argv[]) {
             
             // TH: updates chunk size.
             chunk = (upperBound>maxt)?upperBound/maxt:maxt/upperBound;
-//          printf("[main]: chunk == %lu.\n",chunk);
+            printf("[main]: chunk == %lu.\n",chunk);
             
             // TH: updates remainder.
             remainder = (upperBound>maxt)?upperBound%maxt:0;
+            printf("[main]: remainder == %lu.\n",remainder);
             
             // TH: initializes global 'result' among all threads.
             result  = 0.0;
@@ -83,18 +84,18 @@ int main(int argc, char *argv[]) {
             
             // TH: https://computing.llnl.gov/tutorials/openMP/samples/C/omp_dotprod_openmp.c
             // TH: invokes parallel threads.
-            #pragma omp parallel shared(upperBound,result,chunk,remainder) private(tid, /*partial_each,*/ partial_per_thread, sign/*, loop_cnt*/) num_threads(maxt)
+            #pragma omp parallel shared(upperBound,result,chunk,remainder) private(tid, partial_each, partial_per_thread, sign, loop_cnt) num_threads(maxt)
             {
                
                // TH: retrieves OpenMP thread id.
                tid = omp_get_thread_num();
                
                // TH: initializes OpenMP variables per thread.
-//             partial_each       = 0.0;
+               partial_each       = 0.0;
                partial_per_thread = 0.0;
                
                sign     = 1.0;
-//             loop_cnt = 0.0;
+               loop_cnt = 0.0;
                
                // TH: computes partial sum per thread.
                long start_ = (long) (tid*chunk);
@@ -108,18 +109,19 @@ int main(int argc, char *argv[]) {
                   if(start_>=upperBound) break;
                   
                   partial_per_thread  += (sign/((2.0)*((double)i)+1.0));
-//                loop_cnt = i-start_;
                   sign    = (-1) * sign;
                   
                }//for i.
+               
+               loop_cnt = end_ - start_;
                
                // TH: computes total sum among threads (i.e.per process).
                #pragma omp for reduction(+:result)
                for(i=0; i<maxt; i++)
                   result += (4.0) * partial_per_thread;
                
-//             printf("[main]: Thread %d contributed %lu loops.\n",tid,loop_cnt);
-//             printf("[main]: Thread %d contributed %f.\n",tid,partial_per_thread);
+               printf("[main]: Thread %d contributed %lu loops.\n",tid,loop_cnt);
+               printf("[main]: Thread %d contributed %f.\n",tid,partial_per_thread);
                
             }//pragma.
             
