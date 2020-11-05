@@ -362,7 +362,6 @@ fi
 echo >> $dest
 echo "START: Testing Matrix-Vector-OMP Multiply" >> $dest
 
-# export OMP_NUM_THREADS=2
 sbatch --wait slurm_mvopenmp.bash ./input/matrix1.m ./input/vector1.m ./output/outputVector.m 2
 diff -i -w -B ./output/outputVector.m $TESTFILES/m1v1output.m >>diff.out
 if [ "$?" == 0 ]; then 
@@ -374,8 +373,6 @@ else
     echo "ERROR: 2 thread mv-openmp is not calculating correctly" >> $dest
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
-
-echo cat ./log_slurm.txt
 
 rm -f ./log_slurm.txt
 
@@ -393,10 +390,7 @@ fi
 
 rm -f ./log_slurm.txt
 
-exit 1
-
-export OMP_NUM_THREADS=4
-./bin/mv-openmp ./input/matrix1.m ./input/vector1.m ./output/outputVector.m
+sbatch --wait slurm_mvopenmp.bash ./input/matrix1.m ./input/vector1.m ./output/outputVector.m 4
 diff -i -w -B ./output/outputVector.m $TESTFILES/m1v1output.m >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -408,7 +402,9 @@ else
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
 
-./bin/mv-openmp ./input/matrix3.m ./input/vector2.m ./output/outputVector.m
+rm -f ./log_slurm.txt
+
+sbatch --wait slurm_mvopenmp.bash ./input/matrix3.m ./input/vector2.m ./output/outputVector.m 4
 diff -i -w -B ./output/outputVector.m $TESTFILES/m3v2output.m >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -419,9 +415,11 @@ else
     echo "ERROR: 4 thread mv-openmp is not calculating correctly" >> $dest
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
+
+rm -f ./log_slurm.txt
 
 export OMP_NUM_THREADS=16
-./bin/mv-openmp ./input/matrix1.m ./input/vector1.m ./output/outputVector.m
+sbatch --wait slurm_mvopenmp.bash ./input/matrix1.m ./input/vector1.m ./output/outputVector.m 16
 diff -i -w -B ./output/outputVector.m $TESTFILES/m1v1output.m >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -433,7 +431,9 @@ else
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
 
-./bin/mv-openmp ./input/matrix3.m ./input/vector2.m ./output/outputVector.m
+rm -f ./log_slurm.txt
+
+sbatch --wait slurm_mvopenmp.bash ./input/matrix3.m ./input/vector2.m ./output/outputVector.m 16
 diff -i -w -B ./output/outputVector.m $TESTFILES/m3v2output.m >>diff.out
 if [ "$?" == 0 ]; then 
     addPoint
@@ -444,6 +444,8 @@ else
     echo "ERROR: 16 thread mv-openmp is not calculating correctly" >> $dest
     echo "Note: The diff result is in ./diff.out" >> $dest
 fi
+
+rm -f ./log_slurm.txt
 
 # ------------------------------------ MATRIX-MATRIX MULT TESTS  ------------------------------------
 echo >> $dest
