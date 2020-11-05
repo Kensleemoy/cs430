@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     char* next;
     // long term;
     // long result = 0;
-    clock_t start, end;
+    // clock_t start, end;
     // double time;         //this will be used for timing for the report
     long term;
     long firstT = 0;
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
             term = (long)input;
 
             //Start timer
-            start = clock();
+            // start = clock();
 
             //Iterative fibonacci calculation
             #pragma omp parallel for shared(term, result, firstT, secondT, nextTerm)
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
             }
 
             //Stop timer
-            end = clock();
+            // end = clock();
 
             //calculate time
             // time = ((double)(end - start)) / (double)CLOCKS_PER_SEC;
