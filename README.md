@@ -127,6 +127,24 @@ Kenslee Moy, Nori Natsuhara, Shivani Singh, Monte Hedrick, Tung Ho
     <value>
 ```
 
+## PERFORMANCE <br />
+
+* To run Leibniz's series using OpenMP thread(s), run:
+    
+    `make clean && make all && sbatch slurm_piLeib_perf_openmp.bash`
+    
+    NOTE: the macro 'PERFORMANCE' should be defined as 1 in src/piLeib-openmp.c for timer enabled.
+   
+    NOTE: the collected data can be found at output/log_leibniz_perf_openmp.txt.
+
+* To run Leibniz's series using single Linux thread, run:
+    
+    `make clean && make all && sbatch slurm_piLeib_perf_serial.bash`
+    
+    NOTE: the macro 'PERFORMANCE' should be defined as 1 in src/piLeib.c for timer enabled.
+    
+    NOTE: the collected data can be found at output/log_leibniz_perf_serial.txt.
+    
 * Format of accepted Vector .m files:
 ```c
     %%MatrixMarket matrix array integer general
