@@ -5,11 +5,11 @@
 int main(int argc, char *argv[]) {
     int input;
     char* next;
-    int term;
-    int firstT = 0;
-    int secondT = 1;
-    int nextTerm = 0;
-    int result = 0;
+    long term;
+    long firstT = 0;
+    long secondT = 1;
+    long nextTerm = 0;
+    long result = 0;
     clock_t start, end;
     double time;         //this will be used for timing for the report
 
@@ -17,11 +17,11 @@ int main(int argc, char *argv[]) {
         input = strtol(argv[1], &next, 10);
 
         if ((next != argv[1]) && (*next == '\0') && (input >= 0)) {
-            term = input;
+            term = (long)input;
             
             start = clock();
             for(int i = 0; i <= term; i++) {
-                if (i == term) {
+                if ((long)i == term) {
                     result = firstT;
                 }
                 nextTerm = firstT + secondT;
