@@ -10,7 +10,6 @@ long fib(long n);
 int main(int argc, char *argv[]) {
     int input;
     char* next;
-    long term;
     long result = 0;
     clock_t start, end;
     double time;         //this will be used for timing for the report
@@ -18,7 +17,6 @@ int main(int argc, char *argv[]) {
     long firstT = 0;
     long secondT = 1;
     long nextTerm = 0;
-    long result = 0;
 
     //Ensuring the correct number of arguments are there
     if (argc == 2) {
