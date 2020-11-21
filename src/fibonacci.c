@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
             end = clock();
             time = ((double)(end - start)) / (double)CLOCKS_PER_SEC;
             printf("Time: %f\n", time);
-            printf("The [%d] number in the Fibonacci sequence: %d\n", term, result);
+            printf("The [%ld] number in the Fibonacci sequence: %ld\n", term, result);
             return 0;
         } else {
             printf("USAGE: ./fibonacci <natural integer number>\n");
