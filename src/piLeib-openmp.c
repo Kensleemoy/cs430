@@ -4,7 +4,7 @@
 #include <omp.h>
 #include <sys/time.h>
 
-#define PERFORMANCE 1
+#define PERFORMANCE 0
 
 int main(int argc, char *argv[]) {
     if(argc != 2) {
