@@ -30,9 +30,9 @@ int main(int argc, char *argv[]) {
                 secondT = nextTerm;
             }
             end = clock();
-            time = (double)(end - start)/CLOCKS_PER_SEC;
+            time = ((double)(end - start)) / ((double)CLOCKS_PER_SEC);
 
-            printf("Time: %LF\n", time*10000);
+            printf("Time: %f\n", (double)time);
             printf("The [%ld] number in the Fibonacci sequence: %ld\n", term, result);
             return 0;
         } else {
