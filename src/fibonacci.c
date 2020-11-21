@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     long nextTerm = 0;
     long result = 0;
     clock_t start, end;
-    int time;         //this will be used for timing for the report
+    double time;         //this will be used for timing for the report
 
     if (argc == 2) {
         input = strtol(argv[1], &next, 10);
@@ -30,9 +30,9 @@ int main(int argc, char *argv[]) {
                 secondT = nextTerm;
             }
             end = clock();
-            printf("%d", end);
-            time = (end - start)*1000 / CLOCKS_PER_SEC;
-            printf("Time: %d\n", time);
+            time = (double)((end - start)*1000);
+
+            printf("Time: %f\n", time);
             printf("The [%ld] number in the Fibonacci sequence: %ld\n", term, result);
             return 0;
         } else {
