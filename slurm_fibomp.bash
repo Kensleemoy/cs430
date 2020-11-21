@@ -11,7 +11,7 @@ module load slurm
 module load gcc
 
 # Execute the program
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=3
 ./bin/fib-omp $1
 
 ## Some examples:
