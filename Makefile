@@ -9,7 +9,7 @@ OUTPUT	:= ./output
 TEST	:= ./test/
 TESTOUTPUT := ./test/testOutput
 
-all: mandelbrot mandel-openmp #mandel-cuda
+all: mandelbrot mandelbrot-omp #mandel-cuda
 
 mandelbrot: $(SRC)/mandelbrot.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/mandelbrot.c -o $(BIN)/mandelbrot
