@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
 
   /* Open the file and write the header. */
   FILE * fp = fopen(filename,"wb");
-  char *comment="# Mandelbrot set";/* comment should start with # */
+  // char *comment="# Mandelbrot set";/* comment should start with # */
 
   /*write ASCII header to the file*/
   fprintf(fp,
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
   double dy=(ymax-ymin)/yres;
 
   double x, y; /* Coordinates of the current point in the complex plane. */
-  double u, v; /* Coordinates of the iterated point. */
+  // double u, v; /* Coordinates of the iterated point. */
   int i,j; /* Pixel counters */
   int k; /* Iteration counter */
 
