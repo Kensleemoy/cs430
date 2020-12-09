@@ -14,8 +14,8 @@ all: mandelbrot mandel-openmp #mandel-cuda
 mandelbrot: $(SRC)/mandelbrot.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/mandelbrot.c -o $(BIN)/mandelbrot
 
-mandel-openmp: $(SRC)/mandel-openmp.c Makefile
-	$(CC) $(CFLAGS) $(OMPFLAG) $(SRC)/mandel-openmp.c -o $(BIN)/mandel-openmp
+mandelbrot-omp: $(SRC)/mandelbrot-omp.c Makefile
+	$(CC) $(CFLAGS) $(OMPFLAG) $(SRC)/mandelbrot-omp.c -o $(BIN)/mandelbrot-omp
 
 # mandel-cuda: $(SRC)/mandel-cuda.cu Makefile
 # 	nvcc -o $@ $(SRC)/mandel-cuda.cu $(BIN)/mandel-cuda
