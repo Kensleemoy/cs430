@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
   if (argc != 2) {
     printf("Usage:   %s <maxiter> <out.ppm>\n", argv[0]);
     printf("Example: %s 1000 pic.ppm\n", argv[0]);
-    exit(EXIT_FAILURE);
+    return -1;
   }
 
   /* The window in the plane. */
