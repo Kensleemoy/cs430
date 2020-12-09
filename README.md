@@ -5,14 +5,14 @@
 
 To compile, run from root directory:
 ```
-make mandelbrot <xmin> <xmax> <ymin> <ymax> <maxiter> <xres> <out.ppm>
+make mandelbrot
 ```
 
 ## Running & Converting
 
 To run, run from root directory:
 ```
-./bin/mandelbrot
+./bin/mandelbrot <xmin> <xmax> <ymin> <ymax> <maxiter> <xres> <out.ppm>
 ```
 
 This will create a .ppm file. 
