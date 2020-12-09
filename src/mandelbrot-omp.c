@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
   int i,j; /* Pixel counters */
   int k; /* Iteration counter */
 
-  #pragma omp parallel for private(i,j,k) shared(x,y,u,v)
+  #pragma omp parallel for private(i,j,k, u2, v2) shared(x,y,u,v, yres, ymax, dy, xres,xmin,maxiter)
   for (j = 0; j < yres; j++) {
     y = ymax - j * dy;
     for(i = 0; i < xres; i++) {
