@@ -10,10 +10,10 @@
   gcc -o mandelbrot -O4 mandelbrot.c
 
   Usage:
-  ./mandelbrot <xmin> <xmax> <ymin> <ymax> <maxiter> <xres> <out.ppm>
+  ./mandelbrot  <out.ppm>
 
   Example:
-  ./mandelbrot 0.27085 0.27100 0.004640 0.004810 1000 1024 pic.ppm
+  ./mandelbrot pic.ppm
 
   The interior of Mandelbrot set is black, the levels are gray.
   If you have very many levels, the picture is likely going to be quite
@@ -36,27 +36,27 @@
 int main(int argc, char* argv[])
 {
   /* Parse the command line arguments. */
-  if (argc != 8) {
-    printf("Usage:   %s <xmin> <xmax> <ymin> <ymax> <maxiter> <xres> <out.ppm>\n", argv[0]);
-    printf("Example: %s 0.27085 0.27100 0.004640 0.004810 1000 1024 pic.ppm\n", argv[0]);
+  if (argc != 2) {
+    printf("Usage:   %s <maxiter> <out.ppm>\n", argv[0]);
+    printf("Example: %s 1000 pic.ppm\n", argv[0]);
     exit(EXIT_FAILURE);
   }
 
   /* The window in the plane. */
-  const double xmin = atof(argv[1]);
-  const double xmax = atof(argv[2]);
-  const double ymin = atof(argv[3]);
-  const double ymax = atof(argv[4]);
+  const double xmin = -2;
+  const double xmax = 1;
+  const double ymin = -1.5;
+  const double ymax = 1.5;
 
   /* Maximum number of iterations, at most 65535. */
-  const uint16_t maxiter = (unsigned short)atoi(argv[5]);
+  const uint16_t maxiter = 1000;
 
   /* Image size, width is given, height is computed. */
-  const int xres = atoi(argv[6]);
-  const int yres = (xres*(ymax-ymin))/(xmax-xmin);
+  const int xres = 1000;
+  const int yres = 1000;
 
   /* The output file name */
-  const char* filename = argv[7];
+  const char* filename = argv[0];
 
   /* Open the file and write the header. */
   FILE * fp = fopen(filename,"wb");
