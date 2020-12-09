@@ -12,7 +12,7 @@ make mandelbrot
 
 To run, run from root directory:
 ```
-./bin/mandelbrot <xmin> <xmax> <ymin> <ymax> <maxiter> <xres> <out.ppm>
+./bin/mandelbrot <out.ppm>
 ```
 
 This will create a .ppm file. 
@@ -20,7 +20,13 @@ This will create a .ppm file.
 If you want to convert this to a .png file, you can run
 the command:
 ```
-convert -normalize <your ppm file name>.ppm <desired png file name>.png
+convert -normalize <your .ppm file name> <desired .png file name>
+```
+
+Example of running and converting (from root directory):
+```
+./bin/mandelbrot pic.ppm
+convert -normalize ./pic.ppm ./converted.png
 ```
 
 ## Resources
