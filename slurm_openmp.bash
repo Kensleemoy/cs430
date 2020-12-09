@@ -8,11 +8,12 @@
 #SBATCH -t 12:00:00       # run time (hh:mm:ss) - 12.0 hours in this example.
 # Generally needed modules:
 module load slurm
+module load gcc
 
 #module load matlab/r2020a
 # Execute the program
 export OMP_NUM_THREADS=4
-./mandelbrot-omp omp.ppm
+./bin/mandelbrot-omp omp.ppm
 
 ## Some examples:
 # mpirun python3 script.py
