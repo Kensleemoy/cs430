@@ -75,16 +75,17 @@ int main(int argc, char* argv[])
   double u, v; /* Coordinates of the iterated point. */
   int i,j; /* Pixel counters */
   int k; /* Iteration counter */
-  double u2, v2;
+  unsigned char color[6];
+  const unsigned char black[] = {0, 0, 0, 0, 0, 0};
 
-  #pragma omp parallel for private(i,j,k, u2, v2) shared(x,y,u,v)
+  #pragma omp parallel for private(i,j,k, color[6]) shared(x,y,u,v)
   for (j = 0; j < yres; j++) {
     y = ymax - j * dy;
     for(i = 0; i < xres; i++) {
       u = 0.0;
       v= 0.0;
-      u2 = u * u;
-      v2 = v*v;
+      double u2 = u * u;
+      double v2 = v*v;
       x = xmin + i * dx;
       /* iterate the point */
       for (k = 1; k < maxiter && (u2 + v2 < 4.0); k++) {
@@ -96,12 +97,10 @@ int main(int argc, char* argv[])
       /* compute  pixel color and write it to file */
       if (k >= maxiter) {
         /* interior */
-        const unsigned char black[] = {0, 0, 0, 0, 0, 0};
         fwrite (black, 6, 1, fp);
       }
       else {
         /* exterior */
-        unsigned char color[6];
         color[0] = k >> 8;
         color[1] = k & 255;
         color[2] = k >> 8;
