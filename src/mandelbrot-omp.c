@@ -72,16 +72,16 @@ int main(int argc, char* argv[])
   double dy=(ymax-ymin)/yres;
 
   double x, y; /* Coordinates of the current point in the complex plane. */
-  // double u, v; /* Coordinates of the iterated point. */
+  double u, v; /* Coordinates of the iterated point. */
   int i,j; /* Pixel counters */
   int k; /* Iteration counter */
 
-  #pragma omp parallel for private(x,y,i,j,k)
+  #pragma omp parallel for private(x,y,u,v,i,j,k)
   for (j = 0; j < yres; j++) {
     y = ymax - j * dy;
     for(i = 0; i < xres; i++) {
-      double u = 0.0;
-      double v= 0.0;
+      u = 0.0;
+      v= 0.0;
       double u2 = u * u;
       double v2 = v*v;
       x = xmin + i * dx;
