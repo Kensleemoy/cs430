@@ -23,6 +23,11 @@ the command:
 convert -normalize <your .ppm file name> <desired .png file name>
 ```
 
+OR, if you want to change the color:
+```
+convert -negate -normalize -fill blue -tint 100 <your .ppm file name> <desired .png file name>
+```
+
 Example of running and converting (from root directory):
 ```
 ./bin/mandelbrot pic.ppm

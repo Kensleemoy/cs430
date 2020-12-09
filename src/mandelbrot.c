@@ -6,14 +6,6 @@
   from the Programming Rosetta Stone, see
   http://rosettacode.org/wiki/Mandelbrot_set
 
-  Compile the program with:
-  gcc -o mandelbrot -O4 mandelbrot.c
-
-  Usage:
-  ./mandelbrot  <out.ppm>
-
-  Example:
-  ./mandelbrot pic.ppm
 
   The interior of Mandelbrot set is black, the levels are gray.
   If you have very many levels, the picture is likely going to be quite
