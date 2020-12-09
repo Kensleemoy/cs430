@@ -13,7 +13,8 @@ module load gcc
 #module load matlab/r2020a
 # Execute the program
 export OMP_NUM_THREADS=4
-./bin/mandelbrot-omp omp.ppm
+./bin/mandelbrot ./dumpTest/serial.ppm
+./bin/mandelbrot-omp ./dumpTest/omp.ppm
 
 ## Some examples:
 # mpirun python3 script.py
