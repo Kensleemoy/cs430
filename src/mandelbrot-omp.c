@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
 {
   /* Parse the command line arguments. */
   if (argc != 2) {
-    printf("Usage:   %s <maxiter> <out.ppm>\n", argv[0]);
-    printf("Example: %s 1000 pic.ppm\n", argv[0]);
+    printf("Usage:   %s <out.ppm>\n", argv[0]);
+    printf("Example: %s pic.ppm\n", argv[0]);
     exit(EXIT_FAILURE);
   }
 
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
   const int yres = 1000;
 
   /* The output file name */
-  const char* filename = argv[0];
+  const char* filename = argv[1];
 
   /* Open the file and write the header. */
   FILE * fp = fopen(filename,"wb");
