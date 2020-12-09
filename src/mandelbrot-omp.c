@@ -75,6 +75,8 @@ int main(int argc, char* argv[])
   double u, v; /* Coordinates of the iterated point. */
   int i,j; /* Pixel counters */
   int k; /* Iteration counter */
+
+  #pragma omp parallel for private(x,y,u,v,i,j,k)
   for (j = 0; j < yres; j++) {
     y = ymax - j * dy;
     for(i = 0; i < xres; i++) {
