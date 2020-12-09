@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
   unsigned char color[6];
   const unsigned char black[] = {0, 0, 0, 0, 0, 0};
 
-  #pragma omp parallel for private(i,j,k, color[6]) shared(x,y,u,v)
+  #pragma omp parallel for private(i,j,k, color) shared(x,y,u,v)
   for (j = 0; j < yres; j++) {
     y = ymax - j * dy;
     for(i = 0; i < xres; i++) {
