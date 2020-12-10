@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
             v2 = v * v;
       };
       /* compute  pixel color and write it to file */
-      int pxlStartLoc = 6*(j*xres+i);
+      int pxlStartLoc = 6*((j*xres)+i);
       if (k >= maxiter) {
         /* interior */
         //const unsigned char black[] = {0, 0, 0, 0, 0, 0};
@@ -166,9 +166,9 @@ int main(int argc, char* argv[])
     }
   }
 
-  for(int imgS = 0; imgS < IMAGE_SIZE; imgS++){
-	fwrite(image, 6, 1, fp);
-  }
+  
+	fwrite(image, 1, IMAGE_SIZE, fp);
+
   fclose(fp);
   return 0;
 }
