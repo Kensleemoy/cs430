@@ -109,7 +109,6 @@ int main(int argc, char* argv[])
 //double x, y; /* Coordinates of the current point in the complex plane. */
 //double u, v; /* Coordinates of the iterated point. */
   int i,j; /* Pixel counters */
-//int k; /* Iteration counter */
 
 //#pragma omp parallel for private(i,j) shared(dx,dy,fp)
   for (j = 0; j < yres; j++) {
@@ -123,20 +122,16 @@ int main(int argc, char* argv[])
       double u2 = u*u;
       double v2 = v*v;
       int k = 0;
-      /* iterate the point */
-	
-        for (k = 1; k < maxiter && (u2 + v2 < 4.0); k++) {
+	    
+      for (k = 1; k < maxiter && (u2 + v2 < 4.0); k++) {
             v = 2 * u * v + y;
             u = u2 - v2 + x;
             u2 = u * u;
             v2 = v * v;
       };
-      /* compute  pixel color and write it to file */
+      
       int pxlStartLoc = 6*((j*xres)+i);
       if (k >= maxiter) {
-        /* interior */
-        //const unsigned char black[] = {0, 0, 0, 0, 0, 0};
-        //fwrite (black, 6, 1, fp);
         image[pxlStartLoc+0] = 0;
         image[pxlStartLoc+1] = 0;
         image[pxlStartLoc+2] = 0;
@@ -145,17 +140,6 @@ int main(int argc, char* argv[])
         image[pxlStartLoc+5] = 0;
       }
       else {
-        /* exterior */
-	/*
-        unsigned char color[6];
-        color[0] = k >> 8;
-        color[1] = k & 255;
-        color[2] = k >> 8;
-        color[3] = k & 255;
-        color[4] = k >> 8;
-        color[5] = k & 255;
-        fwrite(color, 6, 1, fp);
-	*/
         image[pxlStartLoc+0] = k >> 8;
         image[pxlStartLoc+1] = k & 255;
         image[pxlStartLoc+2] = k >> 8;
@@ -166,7 +150,6 @@ int main(int argc, char* argv[])
     }
   }
 
-  
 	fwrite(image, 1, IMAGE_SIZE, fp);
 
   fclose(fp);
