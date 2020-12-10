@@ -109,10 +109,10 @@ int main(int argc, char* argv[])
   int i,j; /* Pixel counters */
   int k; /* Iteration counter */
 
-  #pragma omp parallel for private(i,j,k) shared(x,y,u,v)
+  #pragma omp parallel for private(i,j,k) shared(dx,dy,x,y,u,v,fp)
   for (j = 0; j < yres; j++) {
     y = ymax - j * dy;
-    #pragma omp parallel for private(i) shared(dx,fp,y)
+    //#pragma omp parallel for private(i,k) shared(fp,y,image)
     for(i = 0; i < xres; i++) {
       u = 0.0;
       v= 0.0;
@@ -128,21 +128,22 @@ int main(int argc, char* argv[])
             v2 = v * v;
       };
       /* compute  pixel color and write it to file */
-      int pxlStartLoc = j*xres+(6*i);
+      //int pxlStartLoc = j*xres+(6*i);
       if (k >= maxiter) {
         /* interior */
-        //const unsigned char black[] = {0, 0, 0, 0, 0, 0};
-        //fwrite (black, 6, 1, fp);
+        const unsigned char black[] = {0, 0, 0, 0, 0, 0};
+        fwrite (black, 6, 1, fp);
+        /* 
         image[pxlStartLoc+0] = 0;
         image[pxlStartLoc+1] = 0;
         image[pxlStartLoc+2] = 0;
         image[pxlStartLoc+3] = 0;
         image[pxlStartLoc+4] = 0;
         image[pxlStartLoc+5] = 0;
+	*/
       }
       else {
         /* exterior */
-	/*
         unsigned char color[6];
         color[0] = k >> 8;
         color[1] = k & 255;
@@ -151,13 +152,15 @@ int main(int argc, char* argv[])
         color[4] = k >> 8;
         color[5] = k & 255;
         fwrite(color, 6, 1, fp);
-	*/
+	/*
         image[pxlStartLoc+0] = k >> 8;
         image[pxlStartLoc+1] = k & 255;
         image[pxlStartLoc+2] = k >> 8;
         image[pxlStartLoc+3] = k & 255;
         image[pxlStartLoc+4] = k >> 8;
         image[pxlStartLoc+5] = k & 255;
+	*/
+	
       };
     }
   }
@@ -165,7 +168,7 @@ int main(int argc, char* argv[])
   // for(int imgS = 0; imgS < IMAGE_SIZE; imgS++){
   //	fwrite(image, 6, 1, fp);
   //}
-  fwrite(image,1,IMAGE_SIZE,fp);
+ fwrite(image,1,IMAGE_SIZE,fp);
   fclose(fp);
   return 0;
 }

@@ -9,7 +9,7 @@ OUTPUT	:= ./output
 TEST	:= ./test/
 TESTOUTPUT := ./test/testOutput
 
-all: mandelbrot mandelbrot-omp #mandel-cuda
+all: mandelbrot mandelbrot-omp mandelbrot-cuda
 
 mandelbrot: $(SRC)/mandelbrot.c Makefile
 	$(CC) $(CFLAGS) $(SRC)/mandelbrot.c -o $(BIN)/mandelbrot
@@ -17,8 +17,11 @@ mandelbrot: $(SRC)/mandelbrot.c Makefile
 mandelbrot-omp: $(SRC)/mandelbrot-omp.c Makefile
 	$(CC) $(CFLAGS) $(OMPFLAG) $(SRC)/mandelbrot-omp.c -o $(BIN)/mandelbrot-omp
 
-# mandel-cuda: $(SRC)/mandel-cuda.cu Makefile
-# 	nvcc -o $@ $(SRC)/mandel-cuda.cu $(BIN)/mandel-cuda
+#mandelbrot-cuda: $(SRC)/mandelbrot-cuda.c Makefile
+	#$(NVCC) $(CFLAGS) $(SRC)/mandelbrot-cuda.c -o $(BIN)/mandelbrot-cuda
+
+mandelbrot-cuda: $(SRC)/mandelbrot-cuda.cu Makefile
+	nvcc $(SRC)/mandelbrot-cuda.cu -o $(BIN)/mandelbrot-cuda
 	#$(CC) $(CFLAGS) $(CUDAFLAG) $(SRC)/mandel-cuda.c -o $(BIN)/mandel-cuda
 
 tests:
