@@ -112,6 +112,7 @@ int main(int argc, char* argv[])
   #pragma omp parallel for private(i,j,k) shared(x,y,u,v)
   for (j = 0; j < yres; j++) {
     y = ymax - j * dy;
+    #pragma omp parallel for private(i) shared(dx,fp,y)
     for(i = 0; i < xres; i++) {
       u = 0.0;
       v= 0.0;
@@ -161,9 +162,10 @@ int main(int argc, char* argv[])
     }
   }
 
-  for(int imgS = 0; imgS < IMAGE_SIZE; imgS++){
-	fwrite(image, 6, 1, fp);
-  }
+  // for(int imgS = 0; imgS < IMAGE_SIZE; imgS++){
+  //	fwrite(image, 6, 1, fp);
+  //}
+  fwrite(image,1,IMAGE_SIZE,fp);
   fclose(fp);
   return 0;
 }
