@@ -110,7 +110,8 @@ int main(int argc, char* argv[])
 //#pragma omp parallel for private(i,j) shared(dx,dy,fp)
   for (j = 0; j < yres; j++) {
     double y = ymax - j * dy;
-    #pragma omp parallel for private(i) shared(dx,fp,y)
+    
+    #pragma omp parallel for private(x) shared(i,fp)
     for(i = 0; i < xres; i++) {
       double u = 0.0;
       double v= 0.0;
