@@ -116,8 +116,36 @@ int main(int argc, char* argv[])
       double u = 0.0;
       double v= 0.0;
       double x = xmin + i * dx;
+      double u2 = u*u;
+      double v2 = v*v;
+      int k = 0;
       /* iterate the point */
-      mandelbrot (fp, maxiter, u, v, x, y);
+      // mandelbrot (fp, maxiter, u, v, x, y);
+       for (k = 1; k < maxiter && (u2 + v2 < 4.0); k++) {
+            v = 2 * u * v + y;
+            u = u2 - v2 + x;
+            u2 = u * u;
+            v2 = v * v;
+      };
+      /* compute  pixel color and write it to file */
+      if (k >= maxiter) {
+        /* interior */
+        const unsigned char black[] = {0, 0, 0, 0, 0, 0};
+        // #pragma omp critical
+        fwrite (black, 6, 1, fp);
+      }
+      else {
+        /* exterior */
+        unsigned char color[6];
+        color[0] = k >> 8;
+        color[1] = k & 255;
+        color[2] = k >> 8;
+        color[3] = k & 255;
+        color[4] = k >> 8;
+        color[5] = k & 255;
+        // #pragma omp critical
+        fwrite(color, 6, 1, fp);
+      };
     }
   }
   fclose(fp);
