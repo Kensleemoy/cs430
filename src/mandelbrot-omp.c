@@ -33,6 +33,10 @@
 #include <math.h>
 #include <stdint.h>
 
+#define IMAGE_SIZE 6*1000*1000
+
+unsigned char image[IMAGE_SIZE];
+
 void mandelbrot (FILE *fp, uint16_t maxiter, double u, double v, double x, double y) {
   int k;
   double u2 = u*u;
@@ -115,8 +119,50 @@ int main(int argc, char* argv[])
       double v2 = v*v;
       x = xmin + i * dx;
       /* iterate the point */
-      mandelbrot (fp, maxiter, u, v, x, y);
+	
+        for (k = 1; k < maxiter && (u2 + v2 < 4.0); k++) {
+            v = 2 * u * v + y;
+            u = u2 - v2 + x;
+            u2 = u * u;
+            v2 = v * v;
+      };
+      /* compute  pixel color and write it to file */
+      int pxlStartLoc = j*xres+(6*i);
+      if (k >= maxiter) {
+        /* interior */
+        //const unsigned char black[] = {0, 0, 0, 0, 0, 0};
+        //fwrite (black, 6, 1, fp);
+        image[pxlStartLoc+0] = 0;
+        image[pxlStartLoc+1] = 0;
+        image[pxlStartLoc+2] = 0;
+        image[pxlStartLoc+3] = 0;
+        image[pxlStartLoc+4] = 0;
+        image[pxlStartLoc+5] = 0;
+      }
+      else {
+        /* exterior */
+	/*
+        unsigned char color[6];
+        color[0] = k >> 8;
+        color[1] = k & 255;
+        color[2] = k >> 8;
+        color[3] = k & 255;
+        color[4] = k >> 8;
+        color[5] = k & 255;
+        fwrite(color, 6, 1, fp);
+	*/
+        image[pxlStartLoc+0] = k >> 8;
+        image[pxlStartLoc+1] = k & 255;
+        image[pxlStartLoc+2] = k >> 8;
+        image[pxlStartLoc+3] = k & 255;
+        image[pxlStartLoc+4] = k >> 8;
+        image[pxlStartLoc+5] = k & 255;
+      };
     }
+  }
+
+  for(int imgS = 0; imgS < IMAGE_SIZE; imgS++){
+	fwrite(image, 6, 1, fp);
   }
   fclose(fp);
   return 0;
