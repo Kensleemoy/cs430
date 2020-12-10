@@ -47,6 +47,7 @@ void mandelbrot (FILE *fp, uint16_t maxiter, double u, double v, double x, doubl
       if (k >= maxiter) {
         /* interior */
         const unsigned char black[] = {0, 0, 0, 0, 0, 0};
+        #pragma omp critical
         fwrite (black, 6, 1, fp);
       }
       else {
@@ -58,6 +59,7 @@ void mandelbrot (FILE *fp, uint16_t maxiter, double u, double v, double x, doubl
         color[3] = k & 255;
         color[4] = k >> 8;
         color[5] = k & 255;
+        #pragma omp critical
         fwrite(color, 6, 1, fp);
       };
 }
@@ -100,20 +102,19 @@ int main(int argc, char* argv[])
   double dx=(xmax-xmin)/xres;
   double dy=(ymax-ymin)/yres;
 
-  double x, y; /* Coordinates of the current point in the complex plane. */
-  double u, v; /* Coordinates of the iterated point. */
+//double x, y; /* Coordinates of the current point in the complex plane. */
+//double u, v; /* Coordinates of the iterated point. */
   int i,j; /* Pixel counters */
-  int k; /* Iteration counter */
+//int k; /* Iteration counter */
 
-  #pragma omp parallel for private(i,j,k) shared(x,y,u,v)
+//#pragma omp parallel for private(i,j) shared(dx,dy,fp)
   for (j = 0; j < yres; j++) {
-    y = ymax - j * dy;
+    double y = ymax - j * dy;
+    #pragma omp parallel for private(i) shared(dx,fp,y)
     for(i = 0; i < xres; i++) {
-      u = 0.0;
-      v= 0.0;
-      double u2 = u * u;
-      double v2 = v*v;
-      x = xmin + i * dx;
+      double u = 0.0;
+      double v= 0.0;
+      double x = xmin + i * dx;
       /* iterate the point */
       mandelbrot (fp, maxiter, u, v, x, y);
     }
