@@ -6,6 +6,7 @@
 typedef unsigned char BYTE;
 
 #define IMAGE_SIZE 6*1000*1000
+#define MAXITER 1000
 #define X_RES 1000
 #define Y_RES 1000
 
@@ -27,7 +28,7 @@ typedef unsigned char BYTE;
    double ymax = 1.5;
 
    FILE *fp = fopen(fileName, "wb");
-    fprintf(fp, "P6\n# Mandelbrot, xmin=%lf, xmax=%lf, ymin=%lf, ymax=%lf, maxiter=%d\n%d\n%d\n%d\n", xmin, xmax, ymin, ymax, 1000, X_RES, Y_RES, (1000 < 256 ? 256 : 1000));
+    fprintf(fp,"P6\n# Mandelbrot, xmin=%lf, xmax=%lf, ymin=%lf, ymax=%lf, maxiter=%d\n%d\n%d\n%d\n", xmin, xmax, ymin, ymax, MAXITER, X_RES, Y_RES, (MAXITER < 256 ? 256 : MAXITER));
     fwrite(image, 1, IMAGE_SIZE, fp);
     fclose(fp);
 }
@@ -40,9 +41,9 @@ __global__ void mandelbrot(BYTE* image,uint16_t maxiter){
     	double dx = (xmax-xmin)/X_RES;
     	double dy = (ymax-ymin)/Y_RES;
 
-	int index_x = blockIdx.x * blockDim.x + threadIdx.x;
-	int index_y = blockIdx.y * blockDim.y + threadIdx.y;
-	int grid_width = gridDim.x * blockDim.x;
+	//int index_x = blockIdx.x * blockDim.x + threadIdx.x;
+	//int index_y = blockIdx.y * blockDim.y + threadIdx.y;
+	//int grid_width = gridDim.x * blockDim.x;
 	//int index = index_x * grid_width + index_y;
 
 	int j = blockIdx.x * blockIdx.y;
@@ -89,11 +90,11 @@ int main(int argc, char* argv[]) {
 	
 
 	BYTE* image;
-	dim3 grid_dim(100,10,1);//TODO gridDim
-	dim3 block_dim(100,10,1);//TODO blockDim
+	dim3 grid_dim(100,10,1);
+	dim3 block_dim(100,10,1);
 
 	cudaMallocManaged(&image, IMAGE_SIZE);	
-	mandelbrot<<<grid_dim,block_dim>>>(image,1000);//TODO add dimensions
+	mandelbrot<<<grid_dim,block_dim>>>(image,MAXITER);
 	cudaDeviceSynchronize();
 
 	writeOutput(argv[1],image,X_RES,Y_RES);
