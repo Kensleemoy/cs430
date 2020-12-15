@@ -8,6 +8,7 @@ typedef unsigned char BYTE;
 #define IMAGE_SIZE 6*1000*1000
 #define X_RES 1000
 #define Y_RES 1000
+
 /**
  * writeOutput
  * 
@@ -47,16 +48,24 @@ typedef unsigned char BYTE;
     fclose(fout);
 }
 
-__global__ void mandelBrot(BYTE* image,uint16_t maxiter,double u,double v,double x,double y){
+__global__ void mandelbrot(BYTE* image,uint16_t maxiter,double u,double v,double x,double y){
 	int k;
 	double u2 = u*u;
 	double v2 = v*v;
+    	double xmin = -2;
+    	double xmax = 1;
+    	double ymin = -1.5;
+    	double ymax = 1.5;
+    	double dx = (xmax-xmin)/X_RES;
+    	double dy = (ymax-ymin)/Y_RES;
+
         for (k = 1; k < maxiter && (u2 + v2 < 4.0); k++) {
             v = 2 * u * v + y;
             u = u2 - v2 + x;
             u2 = u * u;
             v2 = v * v;
 	}
+
 	int pxlStartLoc = 6*((j*xres)+i);//TODO Calculate index for CUDA
 	if (k >= maxiter) {
 		image[pxlStartLoc+0] = 0;
@@ -77,14 +86,17 @@ __global__ void mandelBrot(BYTE* image,uint16_t maxiter,double u,double v,double
 }
 
 int main(int argc, char* argv[]) {
+	
+
 	BYTE* image;
-	dim3 gridDim = ?;//TODO gridDim
-	dim3 blockDim = ?;//TODO blockDim
+	dim3 grid_dim(100,1,1);//TODO gridDim
+	dim3 block_dim(10,1,1);//TODO blockDim
 
 	cudaMalloc(&image, IMAGE_SIZE);	
-	mandelBrot(image,1000,?,?,?,?)<<<?,? >>>;//TODO add dimensions
+	mandelbrot<<<grid_dim,block_dim>>>(image,1000,?,?,?,?);//TODO add dimensions
 	cudaDeviceSynchronize();
 
 	writeOutput(argv[1],image,X_RES,Y_RES);
+	cudaFree(image)
 	return 0; 
 }

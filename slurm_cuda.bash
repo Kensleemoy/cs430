@@ -11,7 +11,7 @@ module load slurm
 module load cuda10.0
 
 # Execute the program
-./bin/mandelbrot-cuda 5000000 32 32
+./bin/mandelbrot-cuda ./dumpTest/serial.ppm
 
 status=$?
 if [ $status -ne 0 ]; then
