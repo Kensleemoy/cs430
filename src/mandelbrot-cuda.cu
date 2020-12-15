@@ -21,37 +21,18 @@ typedef unsigned char BYTE;
  * 
  * */
  void writeOutput(const char *fileName, BYTE *image, int width, int height) {
-    int i,j;
-    int max = -1;
-    int size = width*height;
+   double xmin = -2;
+   double xmax = 1;
+   double ymin = -1.5;
+   double ymax = 1.5;
 
-    for (i=0; i < size; ++i) {
-        if(image[i] > max) {
-            max = image[i];
-        }
-    }
-
-    FILE *fout = fopen(fileName, "w");
-
-    fprintf(fout, "P2\n");
-    fprintf(fout, "%d\t%d\n", width, height);
-    fprintf(fout, "%d\n", max);
-
-    for (i=0; i < height; ++i) {
-        for (j=0; j<width; ++j) {
-            fprintf(fout, "%d\t", image[i*width+j]);
-        }
-        fprintf(fout,"\n");
-    }
-
-    fflush(fout);
-    fclose(fout);
+   FILE *fp = fopen(fileName, "wb");
+    fprintf(fp, "P6\n# Mandelbrot, xmin=%lf, xmax=%lf, ymin=%lf, ymax=%lf, maxiter=%d\n%d\n%d\n%d\n", xmin, xmax, ymin, ymax, 1000, X_RES, Y_RES, (1000 < 256 ? 256 : 1000));
+    fwrite(image, 1, IMAGE_SIZE, fp);
+    fclose(fp);
 }
 
-__global__ void mandelbrot(BYTE* image,uint16_t maxiter,double u,double v,double x,double y){
-	int k;
-	double u2 = u*u;
-	double v2 = v*v;
+__global__ void mandelbrot(BYTE* image,uint16_t maxiter){
     	double xmin = -2;
     	double xmax = 1;
     	double ymin = -1.5;
@@ -59,14 +40,33 @@ __global__ void mandelbrot(BYTE* image,uint16_t maxiter,double u,double v,double
     	double dx = (xmax-xmin)/X_RES;
     	double dy = (ymax-ymin)/Y_RES;
 
+	int index_x = blockIdx.x * blockDim.x + threadIdx.x;
+	int index_y = blockIdx.y * blockDim.y + threadIdx.y;
+	int grid_width = gridDim.x * blockDim.x;
+	//int index = index_x * grid_width + index_y;
+
+	int j = blockIdx.x * blockIdx.y;
+	int i = threadIdx.x * threadIdx.y;
+
+	double x = xmin + i * dx;
+	double y = ymax - j * dy;
+
+	int k;
+	double u = 0.0;
+	double v = 0.0;
+	double u2 = u*u;
+	double v2 = v*v;
+
         for (k = 1; k < maxiter && (u2 + v2 < 4.0); k++) {
             v = 2 * u * v + y;
             u = u2 - v2 + x;
             u2 = u * u;
             v2 = v * v;
 	}
-
-	int pxlStartLoc = 6*((j*xres)+i);//TODO Calculate index for CUDA
+	
+	
+	int pxlStartLoc = 6*((j*X_RES)+i);
+	//int pxlStartLoc = 6*(index);
 	if (k >= maxiter) {
 		image[pxlStartLoc+0] = 0;
         	image[pxlStartLoc+1] = 0;
@@ -89,14 +89,14 @@ int main(int argc, char* argv[]) {
 	
 
 	BYTE* image;
-	dim3 grid_dim(100,1,1);//TODO gridDim
-	dim3 block_dim(10,1,1);//TODO blockDim
+	dim3 grid_dim(100,10,1);//TODO gridDim
+	dim3 block_dim(100,10,1);//TODO blockDim
 
-	cudaMalloc(&image, IMAGE_SIZE);	
-	mandelbrot<<<grid_dim,block_dim>>>(image,1000,?,?,?,?);//TODO add dimensions
+	cudaMallocManaged(&image, IMAGE_SIZE);	
+	mandelbrot<<<grid_dim,block_dim>>>(image,1000);//TODO add dimensions
 	cudaDeviceSynchronize();
 
 	writeOutput(argv[1],image,X_RES,Y_RES);
-	cudaFree(image)
+	cudaFree(image);
 	return 0; 
 }
