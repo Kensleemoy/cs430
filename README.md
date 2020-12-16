@@ -15,7 +15,8 @@ To run, run from root directory:
 ./bin/mandelbrot <out.ppm>
 ```
 
-This will create a .ppm file. 
+This will create a .ppm file at the location or your choosing or will
+default to the root directory.
 
 If you want to convert this to a .png file, you can run
 the command:

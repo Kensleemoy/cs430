@@ -1,21 +1,10 @@
 /*
-   This program is imported from:
-   https://gist.github.com/andrejbauer/7919569
+  This program is imported from:
+  https://gist.github.com/andrejbauer/7919569
 
   This program is an adaptation of the Mandelbrot program
   from the Programming Rosetta Stone, see
   http://rosettacode.org/wiki/Mandelbrot_set
-
-
-  The interior of Mandelbrot set is black, the levels are gray.
-  If you have very many levels, the picture is likely going to be quite
-  dark. You can postprocess it to fix the palette. For instance,
-  with ImageMagick you can do (assuming the picture was saved to pic.ppm):
-  convert -normalize pic.ppm pic.png
-
-  The resulting pic.png is still gray, but the levels will be nicer. You
-  can also add colors, for instance:
-  convert -negate -normalize -fill blue -tint 100 pic.ppm pic.png
 
   See http://www.imagemagick.org/Usage/color_mods/ for what ImageMagick
   can do. It can do a lot.
