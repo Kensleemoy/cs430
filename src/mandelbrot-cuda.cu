@@ -46,8 +46,10 @@ __global__ void mandelbrot(BYTE* image,uint16_t maxiter){
 	//int grid_width = gridDim.x * blockDim.x;
 	//int index = index_x * grid_width + index_y;
 
-	int j = blockIdx.x * blockIdx.y;
-	int i = threadIdx.x * threadIdx.y;
+	//int j = blockIdx.x * blockIdx.y;
+	int j = blockIdx.y * gridDim.x + blockIdx.x;
+	//int i = threadIdx.x * threadIdx.y;
+	int i = threadIdx.y * blockDim.x + threadIdx.x;
 
 	double x = xmin + i * dx;
 	double y = ymax - j * dy;
@@ -64,7 +66,6 @@ __global__ void mandelbrot(BYTE* image,uint16_t maxiter){
             u2 = u * u;
             v2 = v * v;
 	}
-	
 	
 	int pxlStartLoc = 6*((j*X_RES)+i);
 	//int pxlStartLoc = 6*(index);
